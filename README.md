@@ -78,3 +78,9 @@ _Podporujeme a oceníme růst, na ten je v NFCtron prostoru dost! 📈 Naučil s
 Přejeme vám hodně štěstí a těšíme se na vaše řešení! 🌟
 
 _–– Tým NFCtron_
+
+
+# Informace o mém postupu
+Informace o mém postupu, plánu, atd. budou v README pro samotnou crypto aplikaci. 
+
+Děkuji za příležitost.
