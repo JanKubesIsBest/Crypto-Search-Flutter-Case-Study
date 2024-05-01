@@ -15,6 +15,8 @@ Technologies:
 ### Design
 I'm going to start with light theme, but if there is enough time, I can do dark theme as well.
 
+Material 3
+
 #### Menu
 - Page view builder
     - First page: trending
