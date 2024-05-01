@@ -1,3 +1,4 @@
+import 'package:crypto_app/view/pages/page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -35,12 +36,17 @@ class MyHomePage extends StatelessWidget{
       ),
       body: 
       Column(children: [
-        Row(
-          children: [],
+        const SizedBox(
+          height: 100,
+          child: Row(
+            children: [],
+          ),
         ),
-        PageView(children: [
-
-        ]),
+        Expanded(
+          child: PageView(children: [
+            MyPage(),
+          ]),
+        ),
       ],)
     );
   }
