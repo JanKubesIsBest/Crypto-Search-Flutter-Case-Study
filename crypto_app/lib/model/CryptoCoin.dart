@@ -23,7 +23,7 @@ class CryptoCoin {
           'id': String id,
           'name': String name,
           'symbol': String symbol,
-          'small': String imageLink,
+          'large': String imageLink,
           'data': {
             'price': double price,
           }

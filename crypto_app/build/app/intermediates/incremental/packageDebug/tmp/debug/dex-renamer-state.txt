@@ -1,4 +1,4 @@
-#Thu May 02 18:23:25 CEST 2024
+#Thu May 02 21:43:47 CEST 2024
 base.0=/Users/jankubes/Documents/Work/NFC Tron /NFCTron case study/cryptoApp/mobile-case-study/crypto_app/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

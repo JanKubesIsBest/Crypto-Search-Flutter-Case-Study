@@ -1,6 +1,6 @@
 import 'package:crypto_app/model/CryptoCoin.dart';
 import 'package:crypto_app/model/get_tending.dart';
-import 'package:crypto_app/view/pages/listOfCryptos.dart';
+import 'package:crypto_app/view/pages/listOfCryptos/listOfCryptos.dart';
 import 'package:flutter/material.dart';
 
 class MyPage extends StatefulWidget {
