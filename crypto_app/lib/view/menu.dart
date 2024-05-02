@@ -1,4 +1,5 @@
 import 'package:crypto_app/view/pages/page.dart';
+import 'package:crypto_app/view/row/rowForLists.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget{
@@ -15,12 +16,7 @@ class MyHomePage extends StatelessWidget{
       ),
       body: 
       Column(children: [
-        const SizedBox(
-          height: 100,
-          child: Row(
-            children: [],
-          ),
-        ),
+        const RowForLists(),
         Expanded(
           child: PageView(children: [
             MyPage(),
