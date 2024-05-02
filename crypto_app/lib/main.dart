@@ -1,5 +1,4 @@
 import 'package:crypto_app/view/menu.dart';
-import 'package:crypto_app/view/pages/page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MyHomePage(title: 'Crypto'),
+      home: const MyHomePage(title: 'Crypto'),
     );
   }
 }

@@ -11,7 +11,10 @@ class CryptoCoin {
   final String name;
   final double price;
 
-  CryptoCoin({required this.id, required this.name, required this.price});
+  final String symbol;
+  final String imageLink;
+
+  CryptoCoin({required this.symbol, required this.imageLink, required this.id, required this.name, required this.price});
 
   factory CryptoCoin.fromJSON(Map<String, dynamic> json) {
     return switch (json) {
@@ -19,12 +22,14 @@ class CryptoCoin {
         'item': {
           'id': String id,
           'name': String name,
+          'symbol': String symbol,
+          'small': String imageLink,
           'data': {
             'price': double price,
           }
         }
       } => 
-      CryptoCoin(id: id, name: name, price: price),
+      CryptoCoin(id: id, name: name, price: price, imageLink: imageLink, symbol: symbol),
       _ => throw const FormatException("Could not load Cryto coin."),
     };
   }

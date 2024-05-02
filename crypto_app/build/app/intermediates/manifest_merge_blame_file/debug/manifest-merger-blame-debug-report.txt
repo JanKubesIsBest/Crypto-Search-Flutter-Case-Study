@@ -13,8 +13,8 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->/Users/jankubes/Documents/Work/NFC Tron /NFCTron case study/cryptoApp/mobile-case-study/crypto_app/android/app/src/debug/AndroidManifest.xml:6:5-66
-15-->/Users/jankubes/Documents/Work/NFC Tron /NFCTron case study/cryptoApp/mobile-case-study/crypto_app/android/app/src/debug/AndroidManifest.xml:6:22-64
+15-->/Users/jankubes/Documents/Work/NFC Tron /NFCTron case study/cryptoApp/mobile-case-study/crypto_app/android/app/src/main/AndroidManifest.xml:34:5-67
+15-->/Users/jankubes/Documents/Work/NFC Tron /NFCTron case study/cryptoApp/mobile-case-study/crypto_app/android/app/src/main/AndroidManifest.xml:34:22-64
 16
 17    <application
 18        android:name="android.app.Application"
