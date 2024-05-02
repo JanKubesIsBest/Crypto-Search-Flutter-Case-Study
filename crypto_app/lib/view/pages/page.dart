@@ -1,5 +1,6 @@
 import 'package:crypto_app/model/CryptoCoin.dart';
 import 'package:crypto_app/model/get_tending.dart';
+import 'package:crypto_app/view/pages/listOfCryptos.dart';
 import 'package:flutter/material.dart';
 
 class MyPage extends StatefulWidget {
@@ -9,15 +10,19 @@ class MyPage extends StatefulWidget {
 
 // Page is going to load needed information.
 class _PageState extends State<MyPage> {
-  Future<List<CryptoCoin>> trendingCoins = getTrendingCoins();
+  Future<RetrievedCryptoCoins> trendingCoins = getTrendingCoins();
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<CryptoCoin>>(
-        future: trendingCoins, builder: (BuildContext context, AsyncSnapshot<List<CryptoCoin>> snapshot) {
-          if (snapshot.hasData) {
-            return const Text("Loaded");
-          } else {
+    return FutureBuilder<RetrievedCryptoCoins>(
+        future: trendingCoins, builder: (BuildContext context, AsyncSnapshot<RetrievedCryptoCoins> snapshot) {
+          if (snapshot.hasData && snapshot.data!.sucessful) {
+            return ListOfCryptos(cryptoCoins: snapshot.data!.retrievedCrypto,);
+          } else if (snapshot.hasData && !snapshot.data!.sucessful) {
+            // TODO: Load last
+            return const Text("Could not load data");
+          }
+          else {
             return const Center(
               child: CircularProgressIndicator(),
             );

@@ -1,3 +1,10 @@
+class RetrievedCryptoCoins {
+  final bool sucessful;
+  final List<CryptoCoin> retrievedCrypto;
+
+  RetrievedCryptoCoins({required this.sucessful, required this.retrievedCrypto});
+}
+
 class CryptoCoin {
   // Three data I'm going to show in the menu (?)
   final String id;
