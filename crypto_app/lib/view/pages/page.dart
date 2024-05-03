@@ -15,7 +15,8 @@ class _PageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<RetrievedCryptoCoins>(
-        future: trendingCoins, builder: (BuildContext context, AsyncSnapshot<RetrievedCryptoCoins> snapshot) {
+        future: trendingCoins,
+        builder: (BuildContext context, AsyncSnapshot<RetrievedCryptoCoins> snapshot) {
           if (snapshot.hasData && snapshot.data!.sucessful) {
             return ListOfCryptos(cryptoCoins: snapshot.data!.retrievedCrypto,);
           } else if (snapshot.hasData && !snapshot.data!.sucessful) {
@@ -27,6 +28,7 @@ class _PageState extends State<MyPage> {
               child: CircularProgressIndicator(),
             );
           }
-        });
+        }
+        );
   }
 }

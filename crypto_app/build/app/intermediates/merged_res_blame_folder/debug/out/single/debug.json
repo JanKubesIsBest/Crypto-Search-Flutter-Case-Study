@@ -4,10 +4,6 @@
         "source": "com.example.crypto_app-main-5:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.crypto_app-merged_res-11:/drawable_launch_background.xml.flat",
-        "source": "com.example.crypto_app-main-5:/drawable/launch_background.xml"
-    },
-    {
         "merged": "com.example.crypto_app-merged_res-11:/mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "com.example.crypto_app-main-5:/mipmap-xxhdpi/ic_launcher.png"
     },

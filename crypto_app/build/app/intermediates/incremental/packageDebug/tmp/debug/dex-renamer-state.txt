@@ -1,4 +1,13 @@
-#Thu May 02 21:43:47 CEST 2024
-base.0=/Users/jankubes/Documents/Work/NFC Tron /NFCTron case study/cryptoApp/mobile-case-study/crypto_app/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+#Thu May 02 22:12:21 CEST 2024
+base.0=/Users/jankubes/Documents/Work/NFC Tron /NFCTron case study/cryptoApp/mobile-case-study/crypto_app/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+base.1=/Users/jankubes/Documents/Work/NFC Tron /NFCTron case study/cryptoApp/mobile-case-study/crypto_app/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.2=/Users/jankubes/Documents/Work/NFC Tron /NFCTron case study/cryptoApp/mobile-case-study/crypto_app/build/app/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
+base.3=/Users/jankubes/Documents/Work/NFC Tron /NFCTron case study/cryptoApp/mobile-case-study/crypto_app/build/app/intermediates/dex/debug/mergeProjectDexDebug/15/classes.dex
 path.0=classes.dex
+path.1=0/classes.dex
+path.2=1/classes.dex
+path.3=15/classes.dex
 renamed.0=classes.dex
+renamed.1=classes2.dex
+renamed.2=classes3.dex
+renamed.3=classes4.dex
