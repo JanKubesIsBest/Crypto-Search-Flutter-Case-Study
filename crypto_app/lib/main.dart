@@ -1,7 +1,11 @@
+import 'package:crypto_app/model/database/open_database.dart';
 import 'package:crypto_app/view/menu.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final database = openMyDatabase();
+
   runApp(const MyApp());
 }
 
