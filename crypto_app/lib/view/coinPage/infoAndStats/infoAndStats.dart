@@ -77,6 +77,7 @@ class Metrics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("hello");
     return Column(children: [
       Row(
         children: [
