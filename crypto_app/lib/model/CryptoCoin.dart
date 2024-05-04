@@ -4,9 +4,10 @@ import 'package:http/http.dart' as http;
 
 class RetrievedCryptoCoins {
   final bool sucessful;
+  final bool online;
   final List<CryptoCoin> retrievedCrypto;
 
-  RetrievedCryptoCoins({required this.sucessful, required this.retrievedCrypto});
+  RetrievedCryptoCoins({required this.sucessful, required this.retrievedCrypto, required this.online});
 }
 
 class CryptoCoin {

@@ -24,7 +24,11 @@ class _PageState extends State<MyPage> {
         future: trendingCoins,
         builder: (BuildContext context, AsyncSnapshot<RetrievedCryptoCoins> snapshot) {
           if (snapshot.hasData && snapshot.data!.sucessful) {
-            insertCoins(snapshot.data!.retrievedCrypto);
+            if (snapshot.data!.online) {
+              // If the data is fresh, insert them.
+              insertCoins(snapshot.data!.retrievedCrypto);
+            }
+
             return ListOfCryptos(cryptoCoins: snapshot.data!.retrievedCrypto,);
           } else if (snapshot.hasData && !snapshot.data!.sucessful) {
             // TODO: Load last
@@ -47,21 +51,23 @@ Future<void> insertCoins(List<CryptoCoin> coins) async {
   final int trending = 1;
   
   // Delete all is_connected
-  deleteIsConnectedWhereList(db, 0);
+  await deleteIsConnectedWhereList(db, trending);
 
   for (CryptoCoin coin in coins) {
     List<FullCryptoCoin> databaseCoins = await getCoin(db, coin.id);
 
     InfoAndStats zeroInfoAndStats = InfoAndStats(totalSupply: 0, totalVolume: 0, marketCap: 0, marketCapRanking: 0, todaysHigh: 0, todaysLow: 0, priceChangeOverall: 0, priceChangePercentage: 0);
 
+    final FullCryptoCoin newCrypto = FullCryptoCoin(stats: zeroInfoAndStats, sucessful: true, symbol: coin.symbol, imageLink: coin.imageLink, id: coin.id, name: coin.name, price: coin.price);
+    print(newCrypto.toMap());
 
     // Look if it is inserted
     if (databaseCoins.length > 0) {
       // Update it
-      updateCoin(db, FullCryptoCoin(stats: zeroInfoAndStats, sucessful: true, symbol: coin.symbol, imageLink: coin.imageLink, id: coin.id, name: coin.name, price: coin.price));
+      await updateCoin(db, newCrypto);
     } else {
       // Insert it
-      insertCoinIntoDatabase(db, FullCryptoCoin(stats: zeroInfoAndStats, sucessful: true, symbol: coin.symbol, imageLink: coin.imageLink, id: coin.id, name: coin.name, price: coin.price));
+      await insertCoinIntoDatabase(db, newCrypto);
     }
 
     // Add 

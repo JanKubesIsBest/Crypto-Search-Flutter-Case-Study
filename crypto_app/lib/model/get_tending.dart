@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:crypto_app/model/CryptoCoin.dart';
+import 'package:crypto_app/model/database/open_database.dart';
+import 'package:crypto_app/model/database/retrieve.dart';
 import 'package:http/http.dart' as http;
+import 'package:sqflite/sqflite.dart';
 
 Future<RetrievedCryptoCoins> getTrendingCoins() async {
   final Map<String, String> headers = <String, String>{ 
@@ -21,10 +24,16 @@ Future<RetrievedCryptoCoins> getTrendingCoins() async {
 
     List<CryptoCoin> trending_coins = List<CryptoCoin>.from(l.map((element) => CryptoCoin.fromJSON(element)));
 
-    response = RetrievedCryptoCoins(sucessful: true, retrievedCrypto: trending_coins);
+    response = RetrievedCryptoCoins(sucessful: true, online: true, retrievedCrypto: trending_coins);
   } else {
+    final Database db = await openMyDatabase();
+
     // Retrieve from SQLite
-    response = RetrievedCryptoCoins(sucessful: false, retrievedCrypto: []);
+    List<FullCryptoCoin> coins = await getCoinsViaList(db, 1);
+
+    response = RetrievedCryptoCoins(sucessful: true, online: false, retrievedCrypto: coins);
+
+    // TODO: handle no query
   }
   
   return response;
