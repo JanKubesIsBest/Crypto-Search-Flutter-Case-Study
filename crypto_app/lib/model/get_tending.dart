@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 Future<RetrievedCryptoCoins> getTrendingCoins() async {
   final Map<String, String> headers = <String, String>{ 
     "accept": "application/json",
-    "x-cg-pro-api-key" : "CG-738W9EJdfn1DGs8eED84JFBS",
+    "x-cg-api-key" : "CG-738W9EJdfn1DGs8eED84JFBS",
   };
 
   http.Response http_response = await http.get(Uri.parse("https://api.coingecko.com/api/v3/search/trending",), headers: headers);

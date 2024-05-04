@@ -1,5 +1,7 @@
 import 'package:crypto_app/model/CryptoCoin.dart';
+import 'package:crypto_app/view/coinPage/banner.dart';
 import 'package:crypto_app/view/coinPage/graph.dart';
+
 import 'package:flutter/material.dart';
 
 class CoinPage extends StatefulWidget {
@@ -43,7 +45,7 @@ class _CoinPageState extends State<CoinPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Banner(coin: snapshot.data as FullCryptoCoin),
+                      MyBanner(coin: snapshot.data as FullCryptoCoin),
                     ],
                   ),
                 );
@@ -55,76 +57,6 @@ class _CoinPageState extends State<CoinPage> {
                   child: CircularProgressIndicator(),
                 );
               }
-            }));
-  }
-}
-
-class Banner extends StatelessWidget {
-  final FullCryptoCoin coin;
-
-  const Banner({super.key, required this.coin});
-
-  @override
-  Widget build(BuildContext context) {
-    print(coin.priceChangePercentage);
-    return Row(
-      children: [
-        Column(
-          children: [
-            Column(
-              children: [
-                Row(
-                  children: [
-                    const Text(
-                      "\$",
-                      style: TextStyle(fontSize: 25),
-                    ),
-                    Text(
-                      coin.price.toStringAsFixed(4),
-                      style: TextStyle(fontSize: 33),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "${coin.priceChangeOverall.toStringAsFixed(3)} ",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: coin.priceChangePercentage >= 0
-                              ? Colors.green
-                              : Colors.red),
-                    ),
-                    Text(
-                      "(${coin.priceChangePercentage.toStringAsFixed(2)}%)",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: coin.priceChangePercentage >= 0
-                              ? Colors.green
-                              : Colors.red),
-                    ),
-                    const Text(" 24h",
-                        style: TextStyle(
-                          fontSize: 17,
-                          color: Color.fromARGB(170, 0, 0, 0),
-                        )),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-        const Spacer(),
-        Padding(
-          padding: const EdgeInsets.only(right: 10.0, top: 1),
-          child: CircleAvatar(
-            radius: 35,
-            backgroundImage: NetworkImage(coin.imageLink),
-          ),
-        ),
-      ],
-    );
+            },),);
   }
 }

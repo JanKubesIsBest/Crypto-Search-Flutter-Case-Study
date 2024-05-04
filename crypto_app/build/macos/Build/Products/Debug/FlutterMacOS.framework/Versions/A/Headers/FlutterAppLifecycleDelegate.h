@@ -2,14 +2,13 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-#ifndef FLUTTER_FLUTTERAPPLIFECYCLEDELEGATE_H_
-#define FLUTTER_FLUTTERAPPLIFECYCLEDELEGATE_H_
+#ifndef FLUTTER_SHELL_PLATFORM_DARWIN_MACOS_FRAMEWORK_HEADERS_FLUTTERAPPLIFECYCLEDELEGATE_H_
+#define FLUTTER_SHELL_PLATFORM_DARWIN_MACOS_FRAMEWORK_HEADERS_FLUTTERAPPLIFECYCLEDELEGATE_H_
 
 #import <Cocoa/Cocoa.h>
 #include <Foundation/Foundation.h>
 
 #import "FlutterMacros.h"
-#import "FlutterPluginMacOS.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Protocol for listener of lifecycle events from the NSApplication, typically a
  * FlutterPlugin.
  */
+FLUTTER_DARWIN_EXPORT
 @protocol FlutterAppLifecycleDelegate <NSObject>
 
 @optional
@@ -91,7 +91,17 @@ NS_ASSUME_NONNULL_BEGIN
  * Called when the |FlutterAppDelegate| gets the applicationDidUnhide
  * notification.
  */
-- (void)handleDidChangeOcclusionState:(NSNotification*)notification API_AVAILABLE(macos(10.9));
+- (void)handleDidChangeOcclusionState:(NSNotification*)notification;
+
+/**
+ * Called when the |FlutterAppDelegate| gets the application:openURLs:
+ * callback.
+ *
+ * Implementers should return YES if they handle the URLs, otherwise NO.
+ * Delegates will be called in order of registration, and once a delegate
+ * returns YES, no further delegates will reiceve this callback.
+ */
+- (BOOL)handleOpenURLs:(NSArray<NSURL*>*)urls;
 
 /**
  * Called when the |FlutterAppDelegate| gets the applicationWillTerminate
@@ -134,4 +144,4 @@ FLUTTER_DARWIN_EXPORT
 
 NS_ASSUME_NONNULL_END
 
-#endif  // FLUTTER_FLUTTERAPPLIFECYCLEDELEGATE_H_
+#endif  // FLUTTER_SHELL_PLATFORM_DARWIN_MACOS_FRAMEWORK_HEADERS_FLUTTERAPPLIFECYCLEDELEGATE_H_
