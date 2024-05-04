@@ -11,7 +11,7 @@ Future<Database> openMyDatabase() async {
 
       createCoinTable(db);
     },
-    version: 1,
+    version: 2,
   );
 
   print("Created databases");
@@ -22,7 +22,7 @@ Future<Database> openMyDatabase() async {
 Future<void> createCoinTable(Database db) async {
   print("Creating coin table");
   return db.execute(
-    'CREATE TABLE coin(id INTEGER PRIMARY KEY, name TEXT, symbol TEXT, coin_id TEXT, image_link TEXT, price REAL, market_cap REAL, market_cap_rank INT, todays_high REAL, todays_low REAL, price_change REAL, price_change_perc REAL, total_volume REAL, total_supply REAL, updated TEXT)'
+    'CREATE TABLE coin(id INTEGER PRIMARY KEY, name TEXT, symbol TEXT, coin_id TEXT, image_link TEXT, price REAL, market_cap INT, market_cap_rank INT, todays_high REAL, todays_low REAL, price_change REAL, price_change_perc REAL, total_volume REAL, total_supply REAL, updated TEXT)'
   );
 }
 
