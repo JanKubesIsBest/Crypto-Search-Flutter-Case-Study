@@ -1,0 +1,1 @@
+ /Users/jankubes/Documents/Work/NFC\ Tron\ /NFCTron\ case\ study/cryptoApp/mobile-case-study/crypto_app/.dart_tool/flutter_build/119833e8a1b22e351759f3ec5fb40506/native_assets.yaml: 

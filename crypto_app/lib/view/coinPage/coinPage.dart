@@ -1,6 +1,6 @@
 import 'package:crypto_app/model/CryptoCoin.dart';
 import 'package:crypto_app/view/coinPage/banner.dart';
-import 'package:crypto_app/view/coinPage/graph.dart';
+import 'package:crypto_app/view/coinPage/infoAndStats/infoAndStats.dart';
 
 import 'package:flutter/material.dart';
 
@@ -30,10 +30,8 @@ class _CoinPageState extends State<CoinPage> {
         // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Align(
-            alignment: Alignment.center,
-            child: Text(widget.coin.name),
-          ),
+          centerTitle: true,
+          title: Text(widget.coin.name),
         ),
         body: FutureBuilder<FullCryptoCoin>(
             future: fullCoin,
@@ -46,6 +44,7 @@ class _CoinPageState extends State<CoinPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       MyBanner(coin: snapshot.data as FullCryptoCoin),
+                      InfoAndStatsView(coin: snapshot.data as FullCryptoCoin),
                     ],
                   ),
                 );

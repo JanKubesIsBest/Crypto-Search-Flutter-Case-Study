@@ -46,12 +46,11 @@ class CryptoCoin {
       "x-cg-api-key" : "CG-738W9EJdfn1DGs8eED84JFBS",
     };
 
-    print("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=$id");
-
     http.Response http_response = await http.get(Uri.parse("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=$id",), headers: headers);
 
     if (http_response.statusCode == 200) {
       // For looking into data
+      print("Data:");
       print(json.decode(http_response.body)[0] as Map<String, dynamic>);
       return FullCryptoCoin.fromJSON(json.decode(http_response.body)[0] as Map<String, dynamic>);
     }
@@ -91,7 +90,7 @@ class FullCryptoCoin extends CryptoCoin {
       'market_cap': int marketCap,
       'market_cap_rank': int marketCapRanking,
       } =>
-          FullCryptoCoin(id: id, name: name, price: price, imageLink: imageLink, symbol: symbol, sucessful: true, stats: new InfoAndStats(marketCap: marketCap, marketCapRanking: marketCapRanking, todaysHigh: todaysHigh, todaysLow: todaysLow, priceChangeOverall: priceChangeOverall, priceChangePercentage: priceChangePercentage)),
+          FullCryptoCoin(id: id, name: name, price: price, imageLink: imageLink, symbol: symbol, sucessful: true, stats: InfoAndStats(marketCap: marketCap, marketCapRanking: marketCapRanking, todaysHigh: todaysHigh, todaysLow: todaysLow, priceChangeOverall: priceChangeOverall, priceChangePercentage: priceChangePercentage)),
       _ => throw const FormatException("Could not load Cryto coin."),
     };
   }
