@@ -9,6 +9,8 @@ class PriceRange extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    print("Drawing");
+    
     final double drawLinesHeight = 20;
 
     final double priceRightNowAsAPercentage = 1 - (high - priceRightNow) / (high - low);

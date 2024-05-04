@@ -53,8 +53,8 @@ class _InfoAndStatsViewState extends State<InfoAndStatsView> {
             ],
           ),
           SizedBox(
-            height: 100,
             width: MediaQuery.of(context).size.width,
+            height: 50,
             child: CustomPaint(
               painter: PriceRange(
                 low: stats.todaysLow,
@@ -63,8 +63,61 @@ class _InfoAndStatsViewState extends State<InfoAndStatsView> {
               ),
             ),
           ),
+          Metrics(coin: coin),
         ],
       ),
+    );
+  }
+}
+
+class Metrics extends StatelessWidget {
+  final FullCryptoCoin coin;
+
+  const Metrics({super.key, required this.coin});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      Row(
+        children: [
+          InfoCard(description: "Market Cap", data: coin.stats.marketCap > 1000000 ? "\$" + (coin.stats.marketCap/1000000).toStringAsFixed(2) + "M" : "\$" + coin.stats.marketCap.toString()),
+          InfoCard(description: "Market Cap Ranking", data: coin.stats.marketCapRanking.toString() + ".")
+        ],
+      ),
+      Row(
+        children: [
+          InfoCard(description: "Price Change", data:  "\$" + coin.stats.priceChangeOverall.toStringAsFixed(2)),
+          InfoCard(description: "Market Change Percentage", data: coin.stats.priceChangeOverall.toStringAsFixed(2) + "%")
+        ],
+      ),
+    ]);
+  }
+}
+
+class InfoCard extends StatelessWidget {
+  final String description;
+  final String data;
+
+  const InfoCard({super.key, required this.description, required this.data});
+  
+  @override
+  Widget build(BuildContext context) {
+    return 
+       Expanded(
+        child: SizedBox(
+          height: 100,
+          child: Card(
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                Text(description, style: TextStyle(color: Color.fromARGB(150, 0, 0, 0)),),
+                Text(data, style: TextStyle(fontSize: 20),),
+              ],),
+            ),
+          ),
+        ),
     );
   }
 }

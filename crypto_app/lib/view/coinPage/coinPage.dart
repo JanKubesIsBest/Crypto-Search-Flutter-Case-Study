@@ -39,7 +39,7 @@ class _CoinPageState extends State<CoinPage> {
                 (BuildContext context, AsyncSnapshot<FullCryptoCoin> snapshot) {
               if (snapshot.hasData && snapshot.data!.sucessful) {
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
