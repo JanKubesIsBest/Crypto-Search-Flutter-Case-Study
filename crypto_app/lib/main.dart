@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final database = openMyDatabase();
+  openMyDatabase();
 
   runApp(const MyApp());
 }

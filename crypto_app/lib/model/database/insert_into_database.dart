@@ -1,13 +1,18 @@
 import 'package:crypto_app/model/CryptoCoin.dart';
+import 'package:crypto_app/model/database/retrieve.dart';
 import 'package:sqflite/sqflite.dart';
 
 // If we are inserting from trending, we will make the missing values zero.
-Future<void> insertCoinIntoDatabase(Database db, FullCryptoCoin coin) async {
+Future<int> insertCoinIntoDatabase(Database db, FullCryptoCoin coin) async {
   print("Inserting coin");
-  await db.insert('coin', coin.toMap());
+  return await db.insert('coin', coin.toMap());
 }
 
-Future<void> insertIsConnectedIntoDatabase(Database db, int coin_id, int list_id) async {
+// I know that this looks weird, but I would have trouble making this by coin database id, and I won't think it is that much of an issue
+// PS: If there is someone reading this, I know it looks bad, but the SQLite library is pretty fast and atleast on my device it does not make any probles.
+Future<void> insertIsConnectedIntoDatabase(Database db, String coin_coin_id, int list_id) async {
+  final int coin_id = await getIdOfACoin(db, coin_coin_id);
+  
   print("Inserting is_connected");
   await db.insert('is_connected', {'coin_id': coin_id, 'list_id': list_id});
 }

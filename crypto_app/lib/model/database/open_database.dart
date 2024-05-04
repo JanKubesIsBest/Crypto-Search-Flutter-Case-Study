@@ -1,3 +1,4 @@
+import 'package:crypto_app/model/database/insert_into_database.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -10,6 +11,8 @@ Future<Database> openMyDatabase() async {
       print("Creating tables");
 
       createCoinTable(db);
+      createIsConnectedTable(db);
+      createListTable(db);
     },
     version: 2,
   );
@@ -35,7 +38,9 @@ Future<void> createIsConnectedTable(Database db) async {
 
 Future<void> createListTable(Database db) async {
   print("Creating list table");
-  return db.execute(
+  await db.execute(
     'CREATE TABLE list(id INTEGER PRIMARY KEY, name TEXT)'
   );
+
+  insertListIntoTheDatabase(db, "Trending");
 }

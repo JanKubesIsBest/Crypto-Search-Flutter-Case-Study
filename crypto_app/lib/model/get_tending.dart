@@ -23,6 +23,7 @@ Future<RetrievedCryptoCoins> getTrendingCoins() async {
 
     response = RetrievedCryptoCoins(sucessful: true, retrievedCrypto: trending_coins);
   } else {
+    // Retrieve from SQLite
     response = RetrievedCryptoCoins(sucessful: false, retrievedCrypto: []);
   }
   

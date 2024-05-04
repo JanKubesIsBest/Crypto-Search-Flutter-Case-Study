@@ -1,4 +1,5 @@
 import 'package:crypto_app/model/CryptoCoin.dart';
+import 'package:crypto_app/model/database/delete.dart';
 import 'package:crypto_app/model/database/insert_into_database.dart';
 import 'package:crypto_app/model/database/open_database.dart';
 import 'package:crypto_app/model/database/retrieve.dart';
@@ -42,10 +43,17 @@ class _PageState extends State<MyPage> {
 Future<void> insertCoins(List<CryptoCoin> coins) async {
   final Database db = await openMyDatabase();
 
+  // Trending list is always created first
+  final int trending = 1;
+  
+  // Delete all is_connected
+  deleteIsConnectedWhereList(db, 0);
+
   for (CryptoCoin coin in coins) {
     List<FullCryptoCoin> databaseCoins = await getCoin(db, coin.id);
 
     InfoAndStats zeroInfoAndStats = InfoAndStats(totalSupply: 0, totalVolume: 0, marketCap: 0, marketCapRanking: 0, todaysHigh: 0, todaysLow: 0, priceChangeOverall: 0, priceChangePercentage: 0);
+
 
     // Look if it is inserted
     if (databaseCoins.length > 0) {
@@ -55,5 +63,8 @@ Future<void> insertCoins(List<CryptoCoin> coins) async {
       // Insert it
       insertCoinIntoDatabase(db, FullCryptoCoin(stats: zeroInfoAndStats, sucessful: true, symbol: coin.symbol, imageLink: coin.imageLink, id: coin.id, name: coin.name, price: coin.price));
     }
+
+    // Add 
+    insertIsConnectedIntoDatabase(db, coin.id, trending);
   }
 }

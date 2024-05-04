@@ -23,3 +23,14 @@ Future<List<FullCryptoCoin>> getCoin(Database db, String cryptoId) async {
     FullCryptoCoin(stats: InfoAndStats(totalSupply: totalSupply, totalVolume: totalVolume.toInt(), marketCap: marketCap, marketCapRanking: marketCapRanking, todaysHigh: todaysHigh, todaysLow: todaysLow, priceChangeOverall: priceChangeOverall, priceChangePercentage: priceChangePercentage), sucessful: true, symbol: symbol, imageLink: imageLink, id: id, name: name, price: price)
   ];
 }
+
+Future<int> getIdOfACoin(Database db, String coinCoinId) async {
+  final List<Map<String, Object?>> coinsMap = await db.query('coin', where: 'coin_id = ?', whereArgs: [coinCoinId]);
+  
+  try {
+    return coinsMap[0]['id'] as int;
+  } catch (error) {
+    print("Error, returning zero");
+    return 0;
+  }
+}
