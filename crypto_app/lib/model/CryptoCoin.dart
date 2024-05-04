@@ -96,6 +96,25 @@ class FullCryptoCoin extends CryptoCoin {
       _ => throw const FormatException("Could not load Cryto coin."),
     };
   }
+
+  Map<String, Object?> toMap() {
+    return {
+      'coin_id': id,
+      'name': name,
+      'symbol': symbol,
+      'image_link': imageLink,
+      'price': price,
+      'price_change_perc': stats.priceChangePercentage,
+      'price_change': stats.priceChangeOverall,
+      'todays_low': stats.todaysLow,
+      'todays_high': stats.todaysHigh,
+      'market_cap': stats.marketCap,
+      'market_cap_rank':  stats.marketCapRanking,
+      'total_supply':  stats.totalSupply,
+      'total_volume':  stats.totalVolume,
+      'updated': DateTime.now().toIso8601String(),
+    }; 
+  }
 }
 
 class InfoAndStats {
