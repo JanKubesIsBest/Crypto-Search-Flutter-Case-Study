@@ -55,7 +55,7 @@ class CryptoCoin {
       return FullCryptoCoin.fromJSON(json.decode(http_response.body)[0] as Map<String, dynamic>);
     }
 
-    InfoAndStats infoAndStats = InfoAndStats(marketCap: 0, marketCapRanking: 0, todaysHigh: 0, todaysLow: 0, priceChangeOverall: 0, priceChangePercentage: 0);
+    InfoAndStats infoAndStats = InfoAndStats(totalSupply: 0, totalVolume: 0, marketCap: 0, marketCapRanking: 0, todaysHigh: 0, todaysLow: 0, priceChangeOverall: 0, priceChangePercentage: 0);
     return FullCryptoCoin(sucessful:false, symbol: symbol, imageLink: imageLink, id: id, name: name, price: price, stats: infoAndStats);
   }
 }
@@ -89,8 +89,10 @@ class FullCryptoCoin extends CryptoCoin {
       'high_24h': double todaysHigh,
       'market_cap': int marketCap,
       'market_cap_rank': int marketCapRanking,
+      'total_supply': double totalSupply,
+      'total_volume': int totalVolume,
       } =>
-          FullCryptoCoin(id: id, name: name, price: price, imageLink: imageLink, symbol: symbol, sucessful: true, stats: InfoAndStats(marketCap: marketCap, marketCapRanking: marketCapRanking, todaysHigh: todaysHigh, todaysLow: todaysLow, priceChangeOverall: priceChangeOverall, priceChangePercentage: priceChangePercentage)),
+          FullCryptoCoin(id: id, name: name, price: price, imageLink: imageLink, symbol: symbol, sucessful: true, stats: InfoAndStats(marketCap: marketCap, marketCapRanking: marketCapRanking, todaysHigh: todaysHigh, todaysLow: todaysLow, priceChangeOverall: priceChangeOverall, priceChangePercentage: priceChangePercentage, totalSupply: totalSupply, totalVolume: totalVolume)),
       _ => throw const FormatException("Could not load Cryto coin."),
     };
   }
@@ -106,5 +108,8 @@ class InfoAndStats {
   final double priceChangeOverall;
   final double priceChangePercentage;
 
-  InfoAndStats({required this.marketCap, required this.marketCapRanking, required this.todaysHigh, required this.todaysLow, required this.priceChangeOverall, required this.priceChangePercentage});
+  final int totalVolume;
+  final double totalSupply;
+
+  InfoAndStats({required this.totalSupply, required this. totalVolume, required this.marketCap, required this.marketCapRanking, required this.todaysHigh, required this.todaysLow, required this.priceChangeOverall, required this.priceChangePercentage});
 }

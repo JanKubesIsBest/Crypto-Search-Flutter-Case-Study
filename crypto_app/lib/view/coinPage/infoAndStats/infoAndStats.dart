@@ -84,10 +84,16 @@ class Metrics extends StatelessWidget {
           InfoCard(description: "Market Cap Ranking", data: coin.stats.marketCapRanking.toString() + ".")
         ],
       ),
+            Row(
+        children: [
+          InfoCard(description: "Total Supply", data: coin.stats.totalSupply > 1000000 ? (coin.stats.totalSupply/1000000).toStringAsFixed(2) + "M" : coin.stats.marketCap.toString()),
+          InfoCard(description: "Total Volume", data: coin.stats.totalVolume > 1000000 ? "\$" + (coin.stats.totalVolume/1000000).toStringAsFixed(2) + "M" : "\$" + coin.stats.totalVolume.toString()),
+        ],
+            ),
       Row(
         children: [
           InfoCard(description: "Price Change", data:  "\$" + coin.stats.priceChangeOverall.toStringAsFixed(2)),
-          InfoCard(description: "Market Change Percentage", data: coin.stats.priceChangeOverall.toStringAsFixed(2) + "%")
+          InfoCard(description: "Price Change Percentage", data: coin.stats.priceChangeOverall.toStringAsFixed(2) + "%")
         ],
       ),
     ]);
