@@ -24,43 +24,98 @@ class ListItem extends StatefulWidget {
 }
 
 class _ListItemState extends State<ListItem> {
+  bool isInTheList = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkIfIsInTheList();
+  }
+
+  Future checkIfIsInTheList() async {
+    Database db = await openMyDatabase();
+    bool isInTheListFuture =
+        await checkIfTheCoinIsInTheList(db, widget.list.id, widget.coinId);
+
+    setState(() {
+      isInTheList = isInTheListFuture;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        // Add is_connected for the crypto
-        // If the crypto is not in the database yet, the function will add it.
-        addCoinToTheDatabase(widget.coinId, widget.list.id);
+        // If is not in the list, add it, else, remove it
+        if (isInTheList) {
+          // Add is_connected for the crypto
+          // If the crypto is not in the database yet, the function will add it.
+          await addCoinToTheDatabase(widget.coinId, widget.list.id);
+          checkIfIsInTheList();
+        } else {
+          // Remove crypto
+        }
       },
       child: Card(
+        color: isInTheList ? Colors.green : Theme.of(context).cardColor,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(
             children: [
               Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     widget.list.name,
-                    style: TextStyle(fontSize: 15),
+                    style: const TextStyle(fontSize: 15),
                   ),
-                  const Text(
-                    "Click to add",
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w300,
-                        color: Color.fromARGB(150, 0, 0, 0)),
+                  Text(
+                    isInTheList
+                        ? "Click to remove from the list"
+                        : "Click to add",
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w300,
+                      color: Color.fromARGB(150, 0, 0, 0),
+                    ),
                   ),
                 ],
               ),
               const Spacer(),
               IconButton(
                 onPressed: () async {
-                  // Delete (is_connected deletion is handle by this function also)
-                  final Database db = await openMyDatabase();
-                  await deleteListFromDatabase(db, widget.list.id);
-
-                  widget.updateList();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text(
+                            "Do you really want to delete this list?"),
+                        content: const Text(
+                            'If you delete this, all cryptos stored in there will be lost.'),
+                        actions: <Widget>[
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            child: const Text('Cancel'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            child: const Text('Delete'),
+                            onPressed: () {
+                              deleteList();
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
                 icon: const Icon(Icons.delete),
               )
@@ -69,6 +124,18 @@ class _ListItemState extends State<ListItem> {
         ),
       ),
     );
+  }
+
+  Future<void> deleteList() async {
+    // Delete (is_connected deletion is handle by this function also)
+    final Database db = await openMyDatabase();
+    await deleteListFromDatabase(db, widget.list.id);
+
+    widget.updateList();
+
+    checkIfIsInTheList();
+
+    Fluttertoast.showToast(msg: "Delete list");
   }
 }
 

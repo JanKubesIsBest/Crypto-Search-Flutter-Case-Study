@@ -6,7 +6,8 @@ import 'package:sqflite/sqflite.dart';
 
 TextEditingController _textFieldController = TextEditingController();
 
-Future<void> showAddListDialog(BuildContext context) async {
+Future<void> showAddListDialog(
+    BuildContext context, Function updateList) async {
   return showDialog(
     context: context,
     builder: (context) {
@@ -32,8 +33,20 @@ Future<void> showAddListDialog(BuildContext context) async {
               textStyle: Theme.of(context).textTheme.labelLarge,
             ),
             child: const Text('Add'),
-            onPressed: () {
-              addNewList(_textFieldController.value.text);
+            onPressed: () async {
+              addNewList(_textFieldController.value.text).then((value) => {
+                    if (value)
+                      {
+                        Fluttertoast.showToast(msg: "List added"),
+                      }
+                    else
+                      {
+                        Fluttertoast.showToast(msg: "Error occured"),
+                      },
+                    print("Updating list !!!!!!!!!!!!!!!"),
+                    updateList.call(),
+                  });
+
               Navigator.of(context).pop();
             },
           ),
@@ -43,16 +56,13 @@ Future<void> showAddListDialog(BuildContext context) async {
   );
 }
 
-void addNewList(String listName) async {
+Future<bool> addNewList(String listName) async {
   // Add new list.
   Database db = await openMyDatabase();
 
   bool result = await insertListIntoTheDatabase(db, listName);
 
-  if (result) {
-    Fluttertoast.showToast(msg: "List added");
-  }
-  else {
-    Fluttertoast.showToast(msg: "Error occured");
-  }
+  print("Inserted list");
+
+  return result;
 }
