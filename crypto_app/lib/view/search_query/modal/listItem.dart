@@ -47,13 +47,15 @@ class _ListItemState extends State<ListItem> {
     return GestureDetector(
       onTap: () async {
         // If is not in the list, add it, else, remove it
-        if (isInTheList) {
+        if (!isInTheList) {
           // Add is_connected for the crypto
           // If the crypto is not in the database yet, the function will add it.
           await addCoinToTheDatabase(widget.coinId, widget.list.id);
           checkIfIsInTheList();
         } else {
           // Remove crypto
+          await removeCoinFromTheList(widget.list.id, widget.coinId);
+          checkIfIsInTheList();
         }
       },
       child: Card(
@@ -163,6 +165,18 @@ Future<void> addCoinToTheDatabase(String coinId, int listId) async {
     }
 
     Fluttertoast.showToast(msg: "Added");
+  } catch (_) {
+    Fluttertoast.showToast(msg: "Error occured");
+  }
+}
+
+Future<void> removeCoinFromTheList(int listId, String coinId) async {
+  try {
+    final Database db = await openMyDatabase();
+
+    await removeFromList_deleteConnected(db, listId, coinId);
+
+    Fluttertoast.showToast(msg: "Removed");
   } catch (_) {
     Fluttertoast.showToast(msg: "Error occured");
   }

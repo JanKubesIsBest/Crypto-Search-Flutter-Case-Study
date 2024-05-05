@@ -49,7 +49,7 @@ class CryptoCoin {
     if (httpResponse.statusCode == 200) {
       // For looking into data
       // print("Data:");
-      // print(json.decode(httpResponse.body)[0] as Map<String, dynamic>);
+      print(json.decode(httpResponse.body)[0] as Map<String, dynamic>);
       
       return FullCryptoCoin.fromJSON(json.decode(httpResponse.body)[0] as Map<String, dynamic>);
     }
