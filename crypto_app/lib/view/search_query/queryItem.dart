@@ -88,7 +88,7 @@ class _CryptoQueryItemState extends State<CryptoQueryItem> {
                   // Show modal bottom sheet.
                   // Add to list.
                   // Contains also create new list option.
-                  showAddModalBottomSheet(context);
+                  showAddModalBottomSheet(context, coin.id);
                 },
                 icon: const Icon(Icons.add_rounded),
               ),
