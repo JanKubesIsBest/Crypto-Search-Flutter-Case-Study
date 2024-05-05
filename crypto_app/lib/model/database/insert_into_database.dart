@@ -17,7 +17,11 @@ Future<void> insertIsConnectedIntoDatabase(Database db, String coinCoinId, int l
   await db.insert('is_connected', {'coin_id': coinId, 'list_id': listId});
 }
 
-Future<void> insertListIntoTheDatabase(Database db, String list) async {
+Future<bool> insertListIntoTheDatabase(Database db, String list) async {
+  // TODO: Handle when the list already exists.
   print("Inserting list");
-  await db.insert('list', {'name': list},);
+  int response = await db.insert('list', {'name': list},);
+
+  if (response != 0) return true;
+  else return false;
 }

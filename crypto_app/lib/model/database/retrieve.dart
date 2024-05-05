@@ -1,4 +1,5 @@
 import 'package:crypto_app/model/CryptoCoin.dart';
+import 'package:crypto_app/model/List.dart';
 import 'package:sqflite/sqflite.dart';
 
 Future<List<FullCryptoCoin>> getCoin(Database db, String cryptoId) async {
@@ -58,4 +59,17 @@ Future<int> getIdOfACoin(Database db, String coinCoinId) async {
     print("Error, returning zero");
     return 0;
   }
+}
+
+Future<List<MyList>> getLists(Database db) async {
+  // We are excluding the Trending list.
+  final List<Map<String, Object?>> mapList = await db.query("list", where: "list.id != 1");
+
+  final List<MyList> lists = [];
+
+  for (Map<String, Object?> map in mapList) {
+    lists.add(MyList(name: map['name'] as String, id: map['id'] as int));
+  }
+
+  return lists;
 }

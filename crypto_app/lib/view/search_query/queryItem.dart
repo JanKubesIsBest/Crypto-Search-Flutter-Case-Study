@@ -1,6 +1,7 @@
 import 'package:crypto_app/model/CryptoCoin.dart';
 import 'package:crypto_app/model/search_coin.dart';
 import 'package:crypto_app/view/coinPage/coinPage.dart';
+import 'package:crypto_app/view/search_query/modal/modal_for_lists.dart';
 import 'package:flutter/material.dart';
 
 class CryptoQueryItem extends StatefulWidget {
@@ -85,11 +86,9 @@ class _CryptoQueryItemState extends State<CryptoQueryItem> {
                 onPressed: () {
                   // Add to list.
                   // Show modal bottom sheet.
-
                   // Add to list.
                   // Contains also create new list option.
-
-
+                  showAddModalBottomSheet(context);
                 },
                 icon: const Icon(Icons.add_rounded),
               ),
