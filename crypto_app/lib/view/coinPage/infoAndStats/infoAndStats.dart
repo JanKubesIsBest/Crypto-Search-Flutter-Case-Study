@@ -30,25 +30,25 @@ class _InfoAndStatsViewState extends State<InfoAndStatsView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Info & Stats",
             style: TextStyle(fontSize: 30),
           ),
           Row(
             children: [
               Text(
-                "\$" + stats.todaysLow.toStringAsFixed(2),
-                style: TextStyle(fontSize: 23),
+                "\$${stats.todaysLow.toStringAsFixed(2)}",
+                style: const TextStyle(fontSize: 23),
               ),
-              Spacer(),
-              Text(
+              const Spacer(),
+              const Text(
                 "Day's range",
                 style: TextStyle(color: Color.fromARGB(150, 0, 0, 0)),
               ),
-              Spacer(),
+              const Spacer(),
               Text(
-                "\$" + stats.todaysHigh.toStringAsFixed(2),
-                style: TextStyle(fontSize: 23),
+                "\$${stats.todaysHigh.toStringAsFixed(2)}",
+                style: const TextStyle(fontSize: 23),
               ),
             ],
           ),
@@ -77,24 +77,23 @@ class Metrics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("hello");
     return Column(children: [
       Row(
         children: [
-          InfoCard(description: "Market Cap", data: coin.stats.marketCap > 1000000 ? "\$" + (coin.stats.marketCap/1000000).toStringAsFixed(2) + "M" : "\$" + coin.stats.marketCap.toString()),
-          InfoCard(description: "Market Cap Ranking", data: coin.stats.marketCapRanking.toString() + ".")
+          InfoCard(description: "Market Cap", data: coin.stats.marketCap > 1000000 ? "\$${(coin.stats.marketCap/1000000).toStringAsFixed(2)}M" : "\$${coin.stats.marketCap}"),
+          InfoCard(description: "Market Cap Ranking", data: "${coin.stats.marketCapRanking}.")
         ],
       ),
-            Row(
+      Row(
         children: [
-          InfoCard(description: "Total Supply", data: coin.stats.totalSupply > 1000000 ? (coin.stats.totalSupply/1000000).toStringAsFixed(2) + "M" : coin.stats.marketCap.toString()),
-          InfoCard(description: "Total Volume", data: coin.stats.totalVolume > 1000000 ? "\$" + (coin.stats.totalVolume/1000000).toStringAsFixed(2) + "M" : "\$" + coin.stats.totalVolume.toString()),
+          InfoCard(description: "Total Supply", data: coin.stats.totalSupply > 1000000 ? "${(coin.stats.totalSupply/1000000).toStringAsFixed(2)}M" : coin.stats.marketCap.toString()),
+          InfoCard(description: "Total Volume", data: coin.stats.totalVolume > 1000000 ? "\$${(coin.stats.totalVolume/1000000).toStringAsFixed(2)}M" : "\$${coin.stats.totalVolume}"),
         ],
             ),
       Row(
         children: [
-          InfoCard(description: "Price Change", data:  "\$" + coin.stats.priceChangeOverall.toStringAsFixed(2)),
-          InfoCard(description: "Price Change Percentage", data: coin.stats.priceChangeOverall.toStringAsFixed(2) + "%")
+          InfoCard(description: "Price Change", data:  "\$${coin.stats.priceChangeOverall.toStringAsFixed(2)}"),
+          InfoCard(description: "Price Change Percentage", data: "${coin.stats.priceChangePercentage.toStringAsFixed(2)}%")
         ],
       ),
     ]);
@@ -115,12 +114,12 @@ class InfoCard extends StatelessWidget {
           height: 100,
           child: Card(
             child: Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                Text(description, style: TextStyle(color: Color.fromARGB(150, 0, 0, 0)),),
-                Text(data, style: TextStyle(fontSize: 20),),
+                Text(description, style: const TextStyle(color: Color.fromARGB(150, 0, 0, 0)),),
+                Text(data, style: const TextStyle(fontSize: 20),),
               ],),
             ),
           ),

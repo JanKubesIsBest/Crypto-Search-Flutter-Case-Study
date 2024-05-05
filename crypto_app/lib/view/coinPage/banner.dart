@@ -8,7 +8,7 @@ class MyBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(coin.stats.priceChangePercentage);
+
     return Row(
       children: [
         Column(
@@ -24,7 +24,7 @@ class MyBanner extends StatelessWidget {
                     ),
                     Text(
                       coin.price.toStringAsFixed(4),
-                      style: TextStyle(fontSize: 33),
+                      style: const TextStyle(fontSize: 33),
                     ),
                   ],
                 ),

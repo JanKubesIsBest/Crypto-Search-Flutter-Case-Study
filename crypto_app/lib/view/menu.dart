@@ -18,7 +18,7 @@ class MyHomePage extends StatelessWidget{
       Column(children: [
         const RowForLists(),
         Expanded(
-          child: PageView(children: [
+          child: PageView(children: const [
             MyPage(),
           ]),
         ),

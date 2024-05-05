@@ -24,11 +24,9 @@ Future<List<FullCryptoCoin>> getCoin(Database db, String cryptoId) async {
   ];
 }
 
-Future<List<FullCryptoCoin>> getCoinsViaList(Database db, int list_id) async {
-  final String neededAtributes = "coin.coin_id, coin.name, symbol, image_link, price, price_change_perc, price_change, todays_low, todays_high, market_cap, market_cap_rank, total_supply, total_volume";
-  final List<Map<String, Object?>> coinsMap = await db.rawQuery("SELECT " + neededAtributes + " FROM coin LEFT JOIN is_connected ON is_connected.coin_id = coin.id LEFT JOIN list ON list.id = is_connected.list_id WHERE list.id = " + list_id.toString(),);
-
-  print(coinsMap);
+Future<List<FullCryptoCoin>> getCoinsViaList(Database db, int listId) async {
+  const String neededAtributes = "coin.coin_id, coin.name, symbol, image_link, price, price_change_perc, price_change, todays_low, todays_high, market_cap, market_cap_rank, total_supply, total_volume";
+  final List<Map<String, Object?>> coinsMap = await db.rawQuery("SELECT $neededAtributes FROM coin LEFT JOIN is_connected ON is_connected.coin_id = coin.id LEFT JOIN list ON list.id = is_connected.list_id WHERE list.id = $listId",);
 
   return [
     for (final {

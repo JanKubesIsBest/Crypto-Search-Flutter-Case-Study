@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
 class MyPage extends StatefulWidget {
+  const MyPage({super.key});
+
   @override
   State<StatefulWidget> createState() => _PageState();
 }
@@ -48,7 +50,7 @@ Future<void> insertCoins(List<CryptoCoin> coins) async {
   final Database db = await openMyDatabase();
 
   // Trending list is always created first
-  final int trending = 1;
+  const int trending = 1;
   
   // Delete all is_connected
   await deleteIsConnectedWhereList(db, trending);
@@ -59,10 +61,9 @@ Future<void> insertCoins(List<CryptoCoin> coins) async {
     InfoAndStats zeroInfoAndStats = InfoAndStats(totalSupply: 0, totalVolume: 0, marketCap: 0, marketCapRanking: 0, todaysHigh: 0, todaysLow: 0, priceChangeOverall: 0, priceChangePercentage: 0);
 
     final FullCryptoCoin newCrypto = FullCryptoCoin(stats: zeroInfoAndStats, sucessful: true, symbol: coin.symbol, imageLink: coin.imageLink, id: coin.id, name: coin.name, price: coin.price);
-    print(newCrypto.toMap());
 
     // Look if it is inserted
-    if (databaseCoins.length > 0) {
+    if (databaseCoins.isNotEmpty) {
       // Update it
       await updateCoin(db, newCrypto);
     } else {

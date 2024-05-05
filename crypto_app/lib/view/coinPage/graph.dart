@@ -2,10 +2,12 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 
 class PriceGraph extends StatelessWidget {
+  const PriceGraph({super.key});
+
   @override
   Widget build(BuildContext context) {
     return LineChart(LineChartData(
-      gridData: FlGridData(show: false),
+      gridData: const FlGridData(show: false),
       borderData: FlBorderData(
         show: false,
       ),

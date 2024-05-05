@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 class RetrievedCryptoCoins {
@@ -40,20 +39,19 @@ class CryptoCoin {
   }
 
   Future<FullCryptoCoin> getFullCoin() async {
-    print("Retrieving");
-
     final Map<String, String> headers = <String, String>{
       "accept": "application/json",
       "x-cg-api-key" : "CG-738W9EJdfn1DGs8eED84JFBS",
     };
 
-    http.Response http_response = await http.get(Uri.parse("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=$id",), headers: headers);
+    http.Response httpResponse = await http.get(Uri.parse("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=$id",), headers: headers);
 
-    if (http_response.statusCode == 200) {
+    if (httpResponse.statusCode == 200) {
       // For looking into data
-      print("Data:");
-      print(json.decode(http_response.body)[0] as Map<String, dynamic>);
-      return FullCryptoCoin.fromJSON(json.decode(http_response.body)[0] as Map<String, dynamic>);
+      // print("Data:");
+      // print(json.decode(httpResponse.body)[0] as Map<String, dynamic>);
+      
+      return FullCryptoCoin.fromJSON(json.decode(httpResponse.body)[0] as Map<String, dynamic>);
     }
 
     InfoAndStats infoAndStats = InfoAndStats(totalSupply: 0, totalVolume: 0, marketCap: 0, marketCapRanking: 0, todaysHigh: 0, todaysLow: 0, priceChangeOverall: 0, priceChangePercentage: 0);
