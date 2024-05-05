@@ -82,7 +82,17 @@ class _CryptoQueryItemState extends State<CryptoQueryItem> {
               ),
               const Spacer(),
               IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.plus_one_rounded)),
+                onPressed: () {
+                  // Add to list.
+                  // Show modal bottom sheet.
+
+                  // Add to list.
+                  // Contains also create new list option.
+
+
+                },
+                icon: const Icon(Icons.add_rounded),
+              ),
             ],
           ),
         ),
