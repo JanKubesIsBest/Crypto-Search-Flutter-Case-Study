@@ -1,4 +1,3 @@
-import 'package:crypto_app/model/CryptoCoin.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

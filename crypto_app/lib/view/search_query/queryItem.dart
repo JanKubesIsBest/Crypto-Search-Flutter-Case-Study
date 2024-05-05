@@ -24,9 +24,22 @@ class _CryptoQueryItemState extends State<CryptoQueryItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:() => {
+      onTap: () => {
         // Price is not used, so we can just pass 0.
-        Navigator.push(context, MaterialPageRoute(builder: (context) => CoinPage(coin: CryptoCoin(symbol: coin.symbol, imageLink: coin.imageLink, id: coin.id, name: coin.name, price: 0)))),
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CoinPage(
+              coin: CryptoCoin(
+                symbol: coin.symbol,
+                imageLink: coin.imageLink,
+                id: coin.id,
+                name: coin.name,
+                price: 0,
+              ),
+            ),
+          ),
+        ),
       },
       child: Card(
         child: Padding(
@@ -51,13 +64,16 @@ class _CryptoQueryItemState extends State<CryptoQueryItem> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          coin.name,
+                          coin.name.length > 14
+                              ? "${coin.name.substring(0, 14)}..."
+                              : coin.name,
                           style: const TextStyle(fontSize: 25),
                         ),
                         Text(
                           coin.symbol,
                           style: const TextStyle(
-                              fontSize: 15, color: Color.fromARGB(159, 0, 0, 0)),
+                              fontSize: 15,
+                              color: Color.fromARGB(159, 0, 0, 0)),
                         ),
                       ],
                     ),
@@ -65,7 +81,8 @@ class _CryptoQueryItemState extends State<CryptoQueryItem> {
                 ],
               ),
               const Spacer(),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.plus_one_rounded)),
+              IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.plus_one_rounded)),
             ],
           ),
         ),

@@ -25,6 +25,7 @@ class _SearchQueryState extends State<SearchQuery> {
   @override
   Widget build(BuildContext context) {
     cryptos = search_coins(widget.searchedCrypto);
+    
     return FutureBuilder<RetrievedCryptoCoinsQuery>(
       future: cryptos,
       builder: (BuildContext context,
@@ -53,6 +54,7 @@ class ListOfCryptosQuery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      padding: EdgeInsets.zero,
       itemBuilder: (context, index) {
         return CryptoQueryItem(coin: cryptos[index]);
       },

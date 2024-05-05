@@ -10,8 +10,9 @@ class CryptoCoinListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:() => {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => CoinPage(coin: coin))),
+      onTap: () => {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => CoinPage(coin: coin))),
       },
       child: Card(
         child: Padding(
@@ -36,13 +37,16 @@ class CryptoCoinListItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          coin.name,
+                          coin.name.length > 14
+                              ? "${coin.name.substring(0, 14)}..."
+                              : coin.name,
                           style: const TextStyle(fontSize: 25),
                         ),
                         Text(
                           coin.symbol,
                           style: const TextStyle(
-                              fontSize: 15, color: Color.fromARGB(159, 0, 0, 0)),
+                              fontSize: 15,
+                              color: Color.fromARGB(159, 0, 0, 0)),
                         ),
                       ],
                     ),
