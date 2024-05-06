@@ -112,7 +112,7 @@ class _ModalBodyState extends State<ModalBody> {
 Future<List<MyList>> getListsWithDatabase() async {
   final Database db = await openMyDatabase();
 
-  List<MyList> lists = await getLists(db);
+  List<MyList> lists = await getLists(db, true);
 
   return lists;
 }

@@ -71,9 +71,15 @@ Future<int> getIdOfACoin(Database db, String coinCoinId) async {
   }
 }
 
-Future<List<MyList>> getLists(Database db) async {
-  // We are excluding the Trending list.
-  final List<Map<String, Object?>> mapList = await db.query("list", where: "list.id != 1");
+Future<List<MyList>> getLists(Database db, bool excludeTrending) async {
+  late final List<Map<String, Object?>> mapList;
+
+  if (excludeTrending) {
+    // We are excluding the Trending list.
+    mapList = await db.query("list", where: "list.id != 1");
+  } else {
+    mapList = await db.query("list",);
+  }
 
   final List<MyList> lists = [];
 

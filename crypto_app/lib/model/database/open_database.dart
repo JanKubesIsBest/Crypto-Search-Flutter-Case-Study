@@ -42,5 +42,6 @@ Future<void> createListTable(Database db) async {
     'CREATE TABLE list(id INTEGER PRIMARY KEY, name TEXT)'
   );
 
-  insertListIntoTheDatabase(db, "Trending");
+  bool response = await insertListIntoTheDatabase(db, "Trending");
+  print(response);
 }
