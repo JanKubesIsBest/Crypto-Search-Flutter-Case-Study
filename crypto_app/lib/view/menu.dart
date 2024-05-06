@@ -6,6 +6,8 @@ import 'package:crypto_app/view/row/rowForLists.dart';
 import 'package:crypto_app/view/search_query/modal/modal_for_lists.dart';
 import 'package:crypto_app/view/search_query/searchQuery.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -24,42 +26,50 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return [
-              SliverAppBar(
-                automaticallyImplyLeading: false,
-                backgroundColor: Theme.of(context).colorScheme.background,
-                centerTitle: true,
-                pinned: true,
-                floating: true,
-                snap: false,
-                elevation: 5,
-                title: Text(widget.title),
-                bottom: AppBar(
-                  title: TextField(
-                    decoration: const InputDecoration()
-                        .applyDefaults(Theme.of(context).inputDecorationTheme)
-                        .copyWith(
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 8),
-                          hintText: 'Search cryptos...',
-                          isCollapsed: true,
-                        ),
-                    onChanged: (value) {
-                      setState(() {
-                        searchedCrypto = value;
-                      });
-                    },
-                  ),
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return [
+            SliverAppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: Theme.of(context).colorScheme.background,
+              centerTitle: true,
+              pinned: true,
+              floating: true,
+              snap: false,
+              elevation: 5,
+              title: Text(widget.title),
+              bottom: AppBar(
+                title: TextField(
+                  decoration: const InputDecoration()
+                      .applyDefaults(Theme.of(context).inputDecorationTheme)
+                      .copyWith(
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 8),
+                        hintText: 'Search cryptos...',
+                        isCollapsed: true,
+                      ),
+                  onChanged: (value) {
+                    setState(() {
+                      // TODO: make it with value notifier
+                      searchedCrypto = value;
+                    });
+                  },
                 ),
+              ),
+            )
+          ];
+        },
+        body: searchedCrypto.isNotEmpty
+            ? SearchQuery(
+                searchedCrypto: searchedCrypto,
               )
-            ];
-          },
-          body: searchedCrypto.isNotEmpty
-              ? SearchQuery(
-                  searchedCrypto: searchedCrypto,
-                )
-              : PageViewBuilderForList()),
+            :
+            // I'm doing it like this as there is a issue with performance of animation. 
+            // I have found that you need to use Provider to fix performance. 
+            ChangeNotifierProvider(
+                create: (context) => new CurrentPageProvider(),
+                child: PageViewBuilderForList(),
+              ),
+      ),
     );
   }
 }
@@ -90,12 +100,15 @@ class _PageViewBuilderForListState extends State<PageViewBuilderForList> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<MyList>>(
-        future: lists,
-        builder: (BuildContext context, AsyncSnapshot<List<MyList>> snapshot) {
-          if (snapshot.hasData) {
+      future: lists,
+      builder: (BuildContext context, AsyncSnapshot<List<MyList>> snapshot) {
+        if (snapshot.hasData) {
             return Column(
               children: [
-                RowForLists(lists: snapshot.data!, controller: _pageController,),
+                RowForLists(
+                  lists: snapshot.data!,
+                  controller: _pageController,
+                ),
                 Expanded(
                   child: PageView.builder(
                     controller: _pageController,
@@ -107,15 +120,31 @@ class _PageViewBuilderForListState extends State<PageViewBuilderForList> {
                         index: index + 1,
                       );
                     },
+                    // IDK if this is good way to this.
+                    onPageChanged: (newValue) {
+                      Provider.of<CurrentPageProvider>(context, listen: false).setCurrentPage(newValue);
+                    },
                   ),
                 ),
               ],
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },);
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+}
+
+class CurrentPageProvider extends ChangeNotifier {
+  int _currentPage = 0;
+
+  int get currentPage => _currentPage;
+
+  void setCurrentPage(int newPage) {
+    _currentPage = newPage;
+    notifyListeners();
   }
 }

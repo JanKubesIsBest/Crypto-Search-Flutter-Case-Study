@@ -1,11 +1,15 @@
 import 'package:crypto_app/model/List.dart';
+import 'package:crypto_app/view/menu.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+import 'package:provider/provider.dart';
 
 class RowForLists extends StatelessWidget {
   final List<MyList> lists;
   final PageController controller;
 
   const RowForLists({super.key, required this.lists, required this.controller});
+
 
   // TODO: This will change completely, design, functions etc..
   @override
@@ -21,9 +25,12 @@ class RowForLists extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                onPressed: () => print("HI"),
+                onPressed: () {
+                  // I have to make this better somehow
+                  controller.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.bounceIn);
+                },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(50, 123, 123, 123),
+                    backgroundColor: Provider.of<CurrentPageProvider>(context).currentPage == index ? const Color.fromARGB(48, 20, 164, 4) : const Color.fromARGB(50, 123, 123, 123),
                     shadowColor: Colors.transparent,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6))),
