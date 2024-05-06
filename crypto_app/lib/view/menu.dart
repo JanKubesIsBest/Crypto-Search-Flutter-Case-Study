@@ -72,6 +72,9 @@ class PageViewBuilderForList extends StatefulWidget {
 class _PageViewBuilderForListState extends State<PageViewBuilderForList> {
   late Future<List<MyList>> lists;
 
+  // Declare and initizlize the page controller
+  final PageController _pageController = PageController(initialPage: 0);
+
   Future<List<MyList>> getListsWithDb() async {
     final Database db = await openMyDatabase();
 
@@ -90,12 +93,12 @@ class _PageViewBuilderForListState extends State<PageViewBuilderForList> {
         future: lists,
         builder: (BuildContext context, AsyncSnapshot<List<MyList>> snapshot) {
           if (snapshot.hasData) {
-            print(snapshot.data);
             return Column(
               children: [
-                const RowForLists(),
+                RowForLists(lists: snapshot.data!, controller: _pageController,),
                 Expanded(
                   child: PageView.builder(
+                    controller: _pageController,
                     // Trending is included in the list as the first one
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {

@@ -23,7 +23,6 @@ class CryptoCoin {
   factory CryptoCoin.fromJSON(Map<String, dynamic> json) {
     return switch (json) {
       {
-        'item': {
           'id': String id,
           'name': String name,
           'symbol': String symbol,
@@ -31,7 +30,6 @@ class CryptoCoin {
           'data': {
             'price': double price,
           }
-        }
       } => 
       CryptoCoin(id: id, name: name, price: price, imageLink: imageLink, symbol: symbol),
       _ => throw const FormatException("Could not load Cryto coin."),

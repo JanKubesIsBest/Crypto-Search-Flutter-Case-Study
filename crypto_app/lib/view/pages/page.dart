@@ -25,6 +25,8 @@ class _PageState extends State<MyPage> {
   @override
   void initState() {
     super.initState();
+    
+    print(widget.index);
 
     // If is trending
     if (widget.index == 1) {
@@ -45,7 +47,7 @@ class _PageState extends State<MyPage> {
       builder:
           (BuildContext context, AsyncSnapshot<RetrievedCryptoCoins> snapshot) {
         if (snapshot.hasData && snapshot.data!.sucessful) {
-          if (snapshot.data!.online) {
+          if (snapshot.data!.online && widget.index == 1) {
             // If the data is fresh, insert them.
             insertCoins(snapshot.data!.retrievedCrypto);
           }

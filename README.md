@@ -28,6 +28,8 @@ Material 3
 - Searched items are like a widget
 - Something like Trading 212
 
+### Databaes
+IMPORTANT !!! : Database includes full crypto coin, I don't know if I will manage to make function of all data, but it is scallable like this.
 
 
 

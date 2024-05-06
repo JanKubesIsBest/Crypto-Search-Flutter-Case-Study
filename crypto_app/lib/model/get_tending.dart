@@ -8,6 +8,7 @@ import 'package:sqflite/sqflite.dart';
 
 Future<RetrievedCryptoCoins> getTrendingCoins() async {
   late final RetrievedCryptoCoins response;
+  print("Getting trending coins");
 
   try {
     final Map<String, String> headers = <String, String>{
@@ -20,12 +21,13 @@ Future<RetrievedCryptoCoins> getTrendingCoins() async {
           "https://api.coingecko.com/api/v3/search/trending",
         ),
         headers: headers);
+    print(httpResponse.body);
 
     if (httpResponse.statusCode == 200) {
       final l = json.decode(httpResponse.body)['coins'];
 
       // For looking into the data
-      // print(l[0]);
+      print(l[0]);
 
       List<CryptoCoin> trendingCoins = List<CryptoCoin>.from(
           l.map((element) => CryptoCoin.fromJSON(element['item'])));
@@ -34,6 +36,8 @@ Future<RetrievedCryptoCoins> getTrendingCoins() async {
           sucessful: true, online: true, retrievedCrypto: trendingCoins);
     }
   } catch (_) {
+    print("An error occured");
+
     final Database db = await openMyDatabase();
 
     // Retrieve from SQLite
