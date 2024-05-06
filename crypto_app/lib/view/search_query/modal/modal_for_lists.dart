@@ -8,9 +8,6 @@ import 'package:crypto_app/model/database/open_database.dart';
 import 'package:flutter/material.dart';
 
 void showAddModalBottomSheet(BuildContext context, String coinId) {
-  Future<List<MyList>> lists = getListsWithDatabase();
-  List<MyList> lists_state = [];
-
   showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {
