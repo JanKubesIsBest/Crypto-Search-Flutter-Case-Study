@@ -40,8 +40,7 @@ class _CoinPageState extends State<CoinPage> {
           if (snapshot.hasData && snapshot.data!.sucessful) {
             return Padding(
               padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              child: ListView(
                 children: [
                   MyBanner(coin: snapshot.data as FullCryptoCoin),
                   PriceGraph(coin: snapshot.data as FullCryptoCoin,),

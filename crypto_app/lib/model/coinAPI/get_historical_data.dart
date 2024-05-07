@@ -19,7 +19,7 @@ Future<HistoricalData> getHistoricalData(String ticker, String startDate, String
         ),
         headers: headers,
     );
-    
+    try {
     if (httpResponse.statusCode == 200) {
       final l = json.decode(httpResponse.body)[0];
       final priceData = l['priceData'];
@@ -37,6 +37,9 @@ Future<HistoricalData> getHistoricalData(String ticker, String startDate, String
       response = HistoricalData(ticker: l['ticker'], prices: historicalPrices, success: true);
     } else {
        response = HistoricalData(ticker: '', prices: [], success: false);
+    }
+    } catch (_) {
+      response = HistoricalData(ticker: '', prices: [], success: false);
     }
 
     return response;

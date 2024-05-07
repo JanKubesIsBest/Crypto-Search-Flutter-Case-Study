@@ -23,20 +23,29 @@ class _PriceGraphState extends State<PriceGraph> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<HistoricalData>(
-        future: historicalPrices,
-        builder: (BuildContext context, AsyncSnapshot<HistoricalData> snapshot) {
-          if (snapshot.hasData) {
-            return SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 100,
-              child: GraphOfThePrice(prices: snapshot.data!.prices,),
-            );
-          } else if (snapshot.hasData && !snapshot.data!.success) {
-            return Container();
-          }
-          return CircularProgressIndicator();
-        });
+    return Padding(
+      padding: const EdgeInsets.only(top: 15.0),
+      child: FutureBuilder<HistoricalData>(
+          future: historicalPrices,
+          builder: (BuildContext context, AsyncSnapshot<HistoricalData> snapshot) {
+            if (snapshot.hasData && snapshot.data!.success) {
+              return Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 250,
+                    child: ClipRRect(borderRadius: BorderRadius.circular(6), child: GraphOfThePrice(prices: snapshot.data!.prices,),),
+                  ),
+                ),
+              );
+            } else if (snapshot.hasData && !snapshot.data!.success) {
+              return Container(height: 0,);
+            }
+            // Better than circular progress indicator, as I think that for most coins this feature won't work.
+            return Container(height: 0,);
+          }),
+    );
   }
 }
 
