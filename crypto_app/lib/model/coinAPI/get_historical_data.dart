@@ -25,14 +25,14 @@ Future<HistoricalData> getHistoricalData(String ticker, String startDate, String
       final priceData = l['priceData'];
 
       // For looking into the data
-      print(l[0]);
-      print(priceData);
+      // print(l[0]);
+      // print(priceData);
 
       List<HistoricalPrice> historicalPrices = List<HistoricalPrice>.from(
         priceData.map((element) => HistoricalPrice.fromJSON(element))
       );
 
-      print(historicalPrices);
+      //print(historicalPrices);
 
       response = HistoricalData(ticker: l['ticker'], prices: historicalPrices, success: true);
     } else {
