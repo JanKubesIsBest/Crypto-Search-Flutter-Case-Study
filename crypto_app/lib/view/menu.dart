@@ -30,7 +30,6 @@ class _MyHomePageState extends State<MyHomePage> {
           return [
             SliverAppBar(
               automaticallyImplyLeading: false,
-              backgroundColor: Theme.of(context).colorScheme.background,
               centerTitle: true,
               pinned: true,
               floating: true,

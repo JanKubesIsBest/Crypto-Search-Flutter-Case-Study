@@ -29,7 +29,6 @@ class _CoinPageState extends State<CoinPage> {
     return Scaffold(
       // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         centerTitle: true,
         title: Text(widget.coin.name),
       ),

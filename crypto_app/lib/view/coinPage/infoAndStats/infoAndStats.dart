@@ -26,40 +26,53 @@ class _InfoAndStatsViewState extends State<InfoAndStatsView> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 15.0, left: 0),
+      padding: const EdgeInsets.only(top: 15.0, left: 0, right: 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "Info & Stats",
-            style: TextStyle(fontSize: 30),
-          ),
-          Row(
-            children: [
-              Text(
-                "\$${stats.todaysLow.toStringAsFixed(2)}",
-                style: const TextStyle(fontSize: 23),
-              ),
-              const Spacer(),
-              const Text(
-                "Day's range",
-                style: TextStyle(color: Color.fromARGB(150, 0, 0, 0)),
-              ),
-              const Spacer(),
-              Text(
-                "\$${stats.todaysHigh.toStringAsFixed(2)}",
-                style: const TextStyle(fontSize: 23),
-              ),
-            ],
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 50,
-            child: CustomPaint(
-              painter: PriceRange(
-                low: stats.todaysLow,
-                high: stats.todaysHigh,
-                priceRightNow: coin.price,
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Info & Stats",
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "\$${stats.todaysLow.toStringAsFixed(2)}",
+                        style: const TextStyle(fontSize: 23),
+                      ),
+                      const Spacer(),
+                      const Text(
+                        "Day's range",
+                        style: TextStyle(color: Color.fromARGB(150, 0, 0, 0)),
+                      ),
+                      const Spacer(),
+                      Text(
+                        "\$${stats.todaysHigh.toStringAsFixed(2)}",
+                        style: const TextStyle(fontSize: 23),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 50,
+                      child: CustomPaint(
+                        painter: PriceRange(
+                          low: stats.todaysLow,
+                          high: stats.todaysHigh,
+                          priceRightNow: coin.price,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
