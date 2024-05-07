@@ -15,18 +15,18 @@ class PriceRange extends CustomPainter {
 
     final double priceRightNowAsAPercentage = 1 - (high - priceRightNow) / (high - low);
 
-    // Green rect
+    // Red rect
     Rect rect = const Offset(0, drawLinesHeight) & Size(size.width, 10);
     Paint rectPaint = Paint()
-    ..color = Colors.green
+    ..color = Colors.red
     ..strokeWidth = 20;
     
     canvas.drawRect(rect, rectPaint);
 
-    // Red rect
+    // Green rect
     rect = const Offset(0, drawLinesHeight) & Size(size.width * priceRightNowAsAPercentage, 10);
     rectPaint = Paint()
-    ..color = Colors.red
+    ..color = Colors.green
     ..strokeWidth = 20;
     canvas.drawRect(rect, rectPaint);
 
