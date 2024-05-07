@@ -14,7 +14,7 @@ Future<Database> openMyDatabase() async {
       createIsConnectedTable(db);
       createListTable(db);
     },
-    version: 1,
+    version: 3,
   );
 
   print("Created databases");

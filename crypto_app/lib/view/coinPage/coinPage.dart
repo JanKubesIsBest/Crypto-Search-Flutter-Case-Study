@@ -1,5 +1,6 @@
 import 'package:crypto_app/model/CryptoCoin.dart';
 import 'package:crypto_app/view/coinPage/banner.dart';
+import 'package:crypto_app/view/coinPage/graph.dart';
 import 'package:crypto_app/view/coinPage/infoAndStats/infoAndStats.dart';
 
 import 'package:flutter/material.dart';
@@ -43,6 +44,7 @@ class _CoinPageState extends State<CoinPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   MyBanner(coin: snapshot.data as FullCryptoCoin),
+                  PriceGraph(coin: snapshot.data as FullCryptoCoin,),
                   InfoAndStatsView(coin: snapshot.data as FullCryptoCoin),
                 ],
               ),

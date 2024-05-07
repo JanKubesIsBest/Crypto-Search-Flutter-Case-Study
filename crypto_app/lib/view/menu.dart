@@ -3,10 +3,8 @@ import 'package:crypto_app/model/database/open_database.dart';
 import 'package:crypto_app/model/database/retrieve.dart';
 import 'package:crypto_app/view/pages/page.dart';
 import 'package:crypto_app/view/row/rowForLists.dart';
-import 'package:crypto_app/view/search_query/modal/modal_for_lists.dart';
 import 'package:crypto_app/view/search_query/searchQuery.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 

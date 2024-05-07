@@ -27,7 +27,7 @@ Future<RetrievedCryptoCoins> getTrendingCoins() async {
       final l = json.decode(httpResponse.body)['coins'];
 
       // For looking into the data
-      print(l[0]);
+      // print(l[0]);
 
       List<CryptoCoin> trendingCoins = List<CryptoCoin>.from(
           l.map((element) => CryptoCoin.fromJSON(element['item'])));

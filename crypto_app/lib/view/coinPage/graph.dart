@@ -1,62 +1,67 @@
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:crypto_app/model/CryptoCoin.dart';
+import 'package:crypto_app/model/coinAPI/get_historical_data.dart';
+import 'package:crypto_app/view/coinPage/loadedGraph.dart';
+import 'package:flutter/material.dart';
 
-class PriceGraph extends StatelessWidget {
-  const PriceGraph({super.key});
+class PriceGraph extends StatefulWidget {
+  final FullCryptoCoin coin;
+
+  const PriceGraph({super.key, required this.coin});
+
+  @override
+  State<StatefulWidget> createState() => _PriceGraphState();
+}
+
+class _PriceGraphState extends State<PriceGraph> {
+  late final Future<HistoricalData> historicalPrices;
+
+  @override
+  void initState() {
+    super.initState();
+    historicalPrices = getHistoricalData(widget.coin.symbol, "2023-01-01", "7day");
+  }
 
   @override
   Widget build(BuildContext context) {
-    return LineChart(LineChartData(
-      gridData: const FlGridData(show: false),
-      borderData: FlBorderData(
-        show: false,
-      ),
-      minX: 0,
-      minY: 0,
-      titlesData: const FlTitlesData(
-        show: true,
-        rightTitles:  AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        topTitles:  AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            reservedSize: 30,
-            interval: 1,
-          ),
-        ),
-        leftTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            reservedSize: 42,
-          ),
-        ),
-      ),
-      lineBarsData: [
-        LineChartBarData(
-          spots: const [
-            FlSpot(0, 3),
-            FlSpot(2.6, 2),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(11, 4),
-          ],
-          isCurved: false,
-          barWidth: 5,
-          isStrokeCapRound: true,
-          dotData: const FlDotData(
-            show: false,
-          ),
-          belowBarData: BarAreaData(
-            show: true,
-          ),
-        )
-      ],
-    ));
+    return FutureBuilder<HistoricalData>(
+        future: historicalPrices,
+        builder: (BuildContext context, AsyncSnapshot<HistoricalData> snapshot) {
+          if (snapshot.hasData) {
+            return SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 100,
+              child: GraphOfThePrice(prices: snapshot.data!.prices,),
+            );
+          } else if (snapshot.hasData && !snapshot.data!.success) {
+            return Container();
+          }
+          return CircularProgressIndicator();
+        });
+  }
+}
+
+class HistoricalData {
+  final String ticker;
+  final bool success;
+  final List<HistoricalPrice> prices;
+
+  HistoricalData({required this.ticker, required this.prices, required this.success});
+}
+
+class HistoricalPrice {
+  final String date;
+  final double price; // Close price in the api response
+
+  HistoricalPrice({required this.date, required this.price});
+
+  factory HistoricalPrice.fromJSON(Map<String, dynamic> json) {
+    return switch (json) {
+      {
+        'date': String date,
+        'close': double price,
+      } =>
+        HistoricalPrice(price: price, date: date),
+      _ => throw const FormatException("Could not load"),
+    };
   }
 }
