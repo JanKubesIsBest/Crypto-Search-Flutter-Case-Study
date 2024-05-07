@@ -5,6 +5,7 @@ import 'package:crypto_app/view/pages/page.dart';
 import 'package:crypto_app/view/row/rowForLists.dart';
 import 'package:crypto_app/view/search_query/searchQuery.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -19,6 +20,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String searchedCrypto = "";
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,21 +37,38 @@ class _MyHomePageState extends State<MyHomePage> {
               elevation: 5,
               title: Text(widget.title),
               bottom: AppBar(
-                title: TextField(
-                  decoration: const InputDecoration()
-                      .applyDefaults(Theme.of(context).inputDecorationTheme)
-                      .copyWith(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 8),
-                        hintText: 'Search cryptos...',
-                        isCollapsed: true,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: controller,
+                        decoration: const InputDecoration()
+                            .applyDefaults(Theme.of(context).inputDecorationTheme)
+                            .copyWith(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 8),
+                              hintText: 'Search cryptos...',
+                              isCollapsed: true,
+                            ),
+                        onChanged: (value) {
+                          setState(() {
+                            // TODO: make it with value notifier
+                            searchedCrypto = value;
+                          });
+                        },
                       ),
-                  onChanged: (value) {
-                    setState(() {
-                      // TODO: make it with value notifier
-                      searchedCrypto = value;
-                    });
-                  },
+                    ),
+                    IconButton(onPressed: () {
+                      setState(() {
+                        searchedCrypto = "";
+                        controller.clear();
+                      });
+                      // Unfocusing the keyboard
+                      FocusManager.instance.primaryFocus?.unfocus();
+                    }, icon: const Icon(Icons.clear))
+                  ],
                 ),
               ),
             )
