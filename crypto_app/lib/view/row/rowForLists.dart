@@ -1,7 +1,6 @@
 import 'package:crypto_app/model/List.dart';
 import 'package:crypto_app/view/menu.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 
 class RowForLists extends StatelessWidget {

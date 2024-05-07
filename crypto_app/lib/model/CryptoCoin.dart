@@ -48,7 +48,11 @@ class CryptoCoin {
       // For looking into data
       // print("Data:");
       print(json.decode(httpResponse.body)[0] as Map<String, dynamic>);
-      
+      print(json.decode(httpResponse.body)[0]["current_price"] is int);
+      print(json.decode(httpResponse.body)[0]["low_24h"] is int);
+      print(json.decode(httpResponse.body)[0]["high_24h"] is int);
+
+
       return FullCryptoCoin.fromJSON(json.decode(httpResponse.body)[0] as Map<String, dynamic>);
     }
 
@@ -79,17 +83,17 @@ class FullCryptoCoin extends CryptoCoin {
       'name': String name,
       'symbol': String symbol,
       'image': String imageLink,
-      'current_price': double price,
+      'current_price': dynamic price, // Is sometime int - Bitcoin
       'price_change_percentage_24h': double priceChangePercentage,
-      'price_change_24h': double priceChangeOverall,
-      'low_24h': double todaysLow,
-      'high_24h': double todaysHigh,
+      'price_change_24h': dynamic priceChangeOverall, // Is sometime int - Bitcoin
+      'low_24h': dynamic todaysLow, // Is sometime int - Bitcoin
+      'high_24h': dynamic todaysHigh, // Is sometime int - Bitcoin
       'market_cap': int marketCap,
       'market_cap_rank': int marketCapRanking,
       'total_supply': double totalSupply,
       'total_volume': int totalVolume,
       } =>
-          FullCryptoCoin(id: id, name: name, price: price, imageLink: imageLink, symbol: symbol, sucessful: true, stats: InfoAndStats(marketCap: marketCap, marketCapRanking: marketCapRanking, todaysHigh: todaysHigh, todaysLow: todaysLow, priceChangeOverall: priceChangeOverall, priceChangePercentage: priceChangePercentage, totalSupply: totalSupply, totalVolume: totalVolume)),
+          FullCryptoCoin(id: id, name: name, price: double.parse(price.toString()), imageLink: imageLink, symbol: symbol, sucessful: true, stats: InfoAndStats(marketCap: marketCap, marketCapRanking: marketCapRanking, todaysHigh: double.parse(todaysHigh.toString()), todaysLow: double.parse(todaysLow.toString()), priceChangeOverall: double.parse(priceChangeOverall.toString()), priceChangePercentage: priceChangePercentage, totalSupply: totalSupply, totalVolume: totalVolume)),
       _ => throw const FormatException("Could not load Cryto coin."),
     };
   }
