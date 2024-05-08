@@ -1,3 +1,13 @@
+# Jak spustit?
+Aplikaci doporučuji spusti na lokálním zařízení pomocí 
+
+> flutter run --release
+
+Pokud však nemáte nainstalovaný Flutter, .apk je schovaná v ***./build/app/outputs/flutter-apk/app-release.apk***
+
+Děkuju za příležitost! Pro více mého textu o projektu najdeve v ***COMMENTS.md***
+
+
 # 🧑🏻‍🚀 NFCtron Mobile Case Study (Spring, 2024)
 
 >👋 Vítejte u zadání pro kandidáty na pozici 📲 **iOS/Android Software Developer** v NFCtron! Vaším úkolem bude
