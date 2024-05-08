@@ -7,19 +7,20 @@ import 'package:crypto_app/model/database/open_database.dart';
 
 import 'package:flutter/material.dart';
 
-void showAddModalBottomSheet(BuildContext context, String coinId) {
+void showAddModalBottomSheet(BuildContext context, String coinId, {Function? updateUI}) {
   showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {
-      return ModalBody(coinId: coinId);
+      return ModalBody(coinId: coinId, updateUI: updateUI,);
     },
   );
 }
 
 class ModalBody extends StatefulWidget {
   final String coinId;
+  final Function? updateUI;
 
-  const ModalBody({super.key, required this.coinId});
+  const ModalBody({super.key, required this.coinId, required this.updateUI});
 
   @override
   State<StatefulWidget> createState() => _ModalBodyState();
@@ -45,6 +46,10 @@ class _ModalBodyState extends State<ModalBody> {
     setState(() {
       lists_state.addAll(updatedList);
     });
+
+    print("Calling function");
+    print(widget.updateUI);
+    widget.updateUI?.call();
   }
 
   @override

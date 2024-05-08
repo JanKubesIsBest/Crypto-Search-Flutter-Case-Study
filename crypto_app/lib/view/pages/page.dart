@@ -12,7 +12,8 @@ import 'package:sqflite/sqflite.dart';
 
 class MyPage extends StatefulWidget {
   final int index;
-  const MyPage({super.key, required this.index});
+  final Function updateUI;
+  const MyPage({super.key, required this.index, required this.updateUI});
 
   @override
   State<StatefulWidget> createState() => _PageState();
@@ -54,6 +55,7 @@ class _PageState extends State<MyPage> {
 
           return ListOfCryptos(
             cryptoCoins: snapshot.data!.retrievedCrypto,
+            updateUI: widget.updateUI,
           );
         } else if (snapshot.hasData && !snapshot.data!.sucessful) {
           // TODO: Load last

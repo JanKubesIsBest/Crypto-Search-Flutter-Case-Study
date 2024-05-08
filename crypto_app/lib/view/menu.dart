@@ -134,6 +134,7 @@ class _PageViewBuilderForListState extends State<PageViewBuilderForList> {
                       return MyPage(
                         // Trending id is 1
                         index: index + 1,
+                        updateUI: updateLists,
                       );
                     },
                     // IDK if this is good way to this.
@@ -151,6 +152,13 @@ class _PageViewBuilderForListState extends State<PageViewBuilderForList> {
         }
       },
     );
+  }
+
+  void updateLists() {
+    setState(() {
+      lists = getListsWithDb();
+    });
+    print("UPdating lists");
   }
 }
 

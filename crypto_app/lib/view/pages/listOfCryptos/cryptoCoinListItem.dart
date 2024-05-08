@@ -1,11 +1,13 @@
 import 'package:crypto_app/model/CryptoCoin.dart';
 import 'package:crypto_app/view/coinPage/coinPage.dart';
+import 'package:crypto_app/view/search_query/modal/modal_for_lists.dart';
 import 'package:flutter/material.dart';
 
 class CryptoCoinListItem extends StatelessWidget {
   final CryptoCoin coin;
+  final Function updateUI;
 
-  const CryptoCoinListItem({super.key, required this.coin});
+  const CryptoCoinListItem({super.key, required this.coin, required this.updateUI});
 
   @override
   Widget build(BuildContext context) {
@@ -54,16 +56,25 @@ class CryptoCoinListItem extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              Row(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const Text(
-                    '\$',
-                    style: TextStyle(fontSize: 15),
+                  Row(
+                    children: [
+                      const Text(
+                        '\$',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      Text(
+                        coin.price.toStringAsFixed(2),
+                        style: const TextStyle(fontSize: 17),
+                      )
+                    ],
                   ),
-                  Text(
-                    coin.price.toStringAsFixed(2),
-                    style: const TextStyle(fontSize: 17),
-                  )
+                  IconButton(onPressed: () {
+                    showAddModalBottomSheet(context, coin.id, updateUI: updateUI);
+                  }, icon: Icon(Icons.add_rounded)
+                  ),
                 ],
               ),
             ],

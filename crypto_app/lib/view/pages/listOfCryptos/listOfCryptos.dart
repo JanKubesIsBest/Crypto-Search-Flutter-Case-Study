@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class ListOfCryptos extends StatelessWidget {
   final List<CryptoCoin> cryptoCoins;
+  final Function updateUI;
 
-  const ListOfCryptos({super.key, required this.cryptoCoins});
+  const ListOfCryptos({super.key, required this.cryptoCoins, required this.updateUI});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class ListOfCryptos extends StatelessWidget {
         final CryptoCoin coin = cryptoCoins[index];
 
         // Maybe wrap this into ListTile?
-        return CryptoCoinListItem(coin: coin,);
+        return CryptoCoinListItem(coin: coin, updateUI: updateUI);
       },
     );
   }
