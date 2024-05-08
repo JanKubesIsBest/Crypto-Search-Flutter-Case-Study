@@ -42,7 +42,7 @@ class CryptoCoinListItem extends StatelessWidget {
                           coin.name.length > 14
                               ? "${coin.name.substring(0, 14)}..."
                               : coin.name,
-                          style: const TextStyle(fontSize: 25),
+                          style: TextStyle(fontSize: 25, color: Theme.of(context).primaryColor),
                         ),
                         Text(
                           coin.symbol,
@@ -59,17 +59,20 @@ class CryptoCoinListItem extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Row(
-                    children: [
-                      const Text(
-                        '\$',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      Text(
-                        coin.price.toStringAsFixed(2),
-                        style: const TextStyle(fontSize: 17),
-                      )
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Row(
+                      children: [
+                        const Text(
+                          '\$',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        Text(
+                          coin.price.toStringAsFixed(2),
+                          style: TextStyle(fontSize: 20, color: Theme.of(context).primaryColor, fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    ),
                   ),
                   IconButton(onPressed: () {
                     showAddModalBottomSheet(context, coin.id, updateUI: updateUI);
