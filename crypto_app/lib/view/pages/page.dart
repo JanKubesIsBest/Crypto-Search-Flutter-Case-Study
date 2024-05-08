@@ -26,7 +26,7 @@ class _PageState extends State<MyPage> {
   @override
   void initState() {
     super.initState();
-    
+
     print(widget.index);
 
     // If is trending
@@ -43,6 +43,7 @@ class _PageState extends State<MyPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("Calling setState");
     return FutureBuilder<RetrievedCryptoCoins>(
       future: trendingCoins,
       builder:
@@ -55,7 +56,10 @@ class _PageState extends State<MyPage> {
 
           return ListOfCryptos(
             cryptoCoins: snapshot.data!.retrievedCrypto,
-            updateUI: widget.updateUI,
+            updateUI: () {
+              widget.updateUI();
+              updateCoinsUi();
+            },
           );
         } else if (snapshot.hasData && !snapshot.data!.sucessful) {
           // TODO: Load last
@@ -67,6 +71,26 @@ class _PageState extends State<MyPage> {
         }
       },
     );
+  }
+
+  void updateCoinsUi() {
+    print("Updating coin ui");
+    late Future<RetrievedCryptoCoins> newCryptoCoins;
+
+    // If is trending
+    if (widget.index == 1) {
+      newCryptoCoins = getTrendingCoins();
+    }
+    // Get List by its id.
+    else {
+      // get list
+      // Database is in the fucniton itself
+      newCryptoCoins = getCoinsByList(widget.index);
+    }
+
+    setState(() {
+      trendingCoins = newCryptoCoins;
+    });
   }
 }
 

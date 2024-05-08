@@ -13,11 +13,13 @@ class ListItem extends StatefulWidget {
   final Function updateList;
   final String coinId;
 
+  final Function? updateUI;
+
   const ListItem(
       {super.key,
       required this.list,
       required this.updateList,
-      required this.coinId});
+      required this.coinId, required this.updateUI});
 
   @override
   State<StatefulWidget> createState() => _ListItemState();
@@ -40,6 +42,8 @@ class _ListItemState extends State<ListItem> {
     setState(() {
       isInTheList = isInTheListFuture;
     });
+
+    widget.updateUI?.call();
   }
 
   @override

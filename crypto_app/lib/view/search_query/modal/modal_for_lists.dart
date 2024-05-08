@@ -47,8 +47,6 @@ class _ModalBodyState extends State<ModalBody> {
       lists_state.addAll(updatedList);
     });
 
-    print("Calling function");
-    print(widget.updateUI);
     widget.updateUI?.call();
   }
 
@@ -73,6 +71,7 @@ class _ModalBodyState extends State<ModalBody> {
                     list: list,
                     updateList: updateList,
                     coinId: widget.coinId,
+                    updateUI: widget.updateUI,
                   );
                 },
               ),
