@@ -5,7 +5,6 @@ import 'package:crypto_app/view/pages/page.dart';
 import 'package:crypto_app/view/row/rowForLists.dart';
 import 'package:crypto_app/view/search_query/searchQuery.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -54,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                         onChanged: (value) {
                           setState(() {
-                            // TODO: make it with value notifier
+                            // I won't make it with value notifier, as there is more logic to the notifier than just text.
                             searchedCrypto = value;
                           });
                         },
@@ -82,8 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
             // I'm doing it like this as there is a issue with performance of animation. 
             // I have found that you need to use Provider to fix performance. 
             ChangeNotifierProvider(
-                create: (context) => new CurrentPageProvider(),
-                child: PageViewBuilderForList(),
+                create: (context) => CurrentPageProvider(),
+                child: const PageViewBuilderForList(),
               ),
       ),
     );
@@ -91,6 +90,8 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class PageViewBuilderForList extends StatefulWidget {
+  const PageViewBuilderForList({super.key});
+
   @override
   State<StatefulWidget> createState() => _PageViewBuilderForListState();
 }

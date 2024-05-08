@@ -9,13 +9,10 @@ class RowForLists extends StatelessWidget {
 
   const RowForLists({super.key, required this.lists, required this.controller});
 
-
-  // TODO: This will change completely, design, functions etc..
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 50,
-
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
@@ -25,8 +22,8 @@ class RowForLists extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
-                  // I have to make this better somehow
-                  controller.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.bounceIn);
+                  // Sadly, I don't have time to implement the animating feature.
+                  controller.jumpToPage(index,);
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Provider.of<CurrentPageProvider>(context).currentPage == index ? const Color.fromARGB(48, 20, 164, 4) : const Color.fromARGB(50, 123, 123, 123),
@@ -36,7 +33,8 @@ class RowForLists extends StatelessWidget {
                   child: Text(
                     lists[index].name,
                     style: const TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.w400),
+                        color: Colors.black, fontWeight: FontWeight.w400,
+                      ),
                 ),
               ),
             );

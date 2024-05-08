@@ -73,7 +73,7 @@ class CryptoCoinListItem extends StatelessWidget {
                   ),
                   IconButton(onPressed: () {
                     showAddModalBottomSheet(context, coin.id, updateUI: updateUI);
-                  }, icon: Icon(Icons.add_rounded)
+                  }, icon: const Icon(Icons.add_rounded)
                   ),
                 ],
               ),

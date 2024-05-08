@@ -2,7 +2,6 @@ import 'package:crypto_app/model/CryptoCoin.dart';
 import 'package:crypto_app/model/coinAPI/get_historical_data.dart';
 import 'package:crypto_app/view/coinPage/loadedGraph.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class PriceGraph extends StatefulWidget {
   final FullCryptoCoin coin;

@@ -49,7 +49,6 @@ class _CoinPageState extends State<CoinPage> {
               ),
             );
           } else if (snapshot.hasData && !snapshot.data!.sucessful) {
-            // TODO: Load last
             return const Text("Could not load data");
           } else {
             return const Center(

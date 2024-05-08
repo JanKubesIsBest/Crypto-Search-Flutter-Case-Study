@@ -52,7 +52,7 @@ Future<List<FullCryptoCoin>> getCoinsViaList(Database db, int listId) async {
 Future<bool> checkIfTheCoinIsInTheList(Database db, int listId, String coinId) async {
   final List<Map<String, Object?>> coinsMap = await db.rawQuery("SELECT coin.id FROM coin LEFT JOIN is_connected ON is_connected.coin_id = coin.id LEFT JOIN list ON list.id = is_connected.list_id WHERE list.id = ? AND coin.coin_id = ?", [listId, coinId]);
 
-  if (coinsMap.length > 0) {
+  if (coinsMap.isNotEmpty) {
     return true;
   } else {
     return false;

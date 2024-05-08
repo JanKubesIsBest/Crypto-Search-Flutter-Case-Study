@@ -45,8 +45,6 @@ Future<RetrievedCryptoCoins> getTrendingCoins() async {
 
     response = RetrievedCryptoCoins(
         sucessful: true, online: false, retrievedCrypto: coins);
-
-    // TODO: handle no query
   }
 
   return response;

@@ -27,8 +27,6 @@ class _PageState extends State<MyPage> {
   void initState() {
     super.initState();
 
-    print(widget.index);
-
     // If is trending
     if (widget.index == 1) {
       trendingCoins = getTrendingCoins();
@@ -43,7 +41,6 @@ class _PageState extends State<MyPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("Calling setState");
     return FutureBuilder<RetrievedCryptoCoins>(
       future: trendingCoins,
       builder:
@@ -62,7 +59,6 @@ class _PageState extends State<MyPage> {
             },
           );
         } else if (snapshot.hasData && !snapshot.data!.sucessful) {
-          // TODO: Load last
           return const Text("Could not load data");
         } else {
           return const Center(

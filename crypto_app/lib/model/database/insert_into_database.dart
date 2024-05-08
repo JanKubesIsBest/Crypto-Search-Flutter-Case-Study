@@ -18,7 +18,7 @@ Future<void> insertIsConnectedIntoDatabase(Database db, String coinCoinId, int l
 }
 
 Future<bool> insertListIntoTheDatabase(Database db, String list) async {
-  // TODO: Handle when the list already exists.
+  // It should not be a problem when there are two lists named the same, it is on the user to decide.
   print("Inserting list");
   int response = await db.insert('list', {'name': list},);
 

@@ -43,7 +43,6 @@ Future<void> showAddListDialog(
                       {
                         Fluttertoast.showToast(msg: "Error occured"),
                       },
-                    print("Updating list !!!!!!!!!!!!!!!"),
                     updateList.call(),
                   });
 

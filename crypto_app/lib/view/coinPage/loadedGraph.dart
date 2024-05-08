@@ -70,8 +70,6 @@ class GraphOfThePrice extends StatelessWidget {
 
     for (int i = 0; i < prices.length; i++) {
       returnSpots.add(FlSpot(i.toDouble(), prices[i].price));
-
-      print(i);
     }
 
     return returnSpots;
