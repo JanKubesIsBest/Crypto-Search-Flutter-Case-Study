@@ -1,5 +1,9 @@
 import 'dart:convert';
+import 'package:crypto_app/model/database/open_database.dart';
+import 'package:crypto_app/model/database/retrieve.dart';
+import 'package:crypto_app/model/database/update.dart';
 import 'package:http/http.dart' as http;
+import 'package:sqflite/sqflite.dart';
 
 class RetrievedCryptoCoins {
   final bool sucessful;
@@ -41,19 +45,26 @@ class CryptoCoin {
       "accept": "application/json",
       "x-cg-api-key" : "CG-738W9EJdfn1DGs8eED84JFBS",
     };
+    try {
+      http.Response httpResponse = await http.get(Uri.parse("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=$id",), headers: headers);
 
-    http.Response httpResponse = await http.get(Uri.parse("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=$id",), headers: headers);
-
-    if (httpResponse.statusCode == 200) {
-      // For looking into data
-      // print("Data:");
-      print(json.decode(httpResponse.body)[0] as Map<String, dynamic>);
-      print(json.decode(httpResponse.body)[0]["current_price"] is int);
-      print(json.decode(httpResponse.body)[0]["low_24h"] is int);
-      print(json.decode(httpResponse.body)[0]["high_24h"] is int);
+        // For looking into data
+        // print("Data:");
+        // print(json.decode(httpResponse.body)[0] as Map<String, dynamic>);
 
 
-      return FullCryptoCoin.fromJSON(json.decode(httpResponse.body)[0] as Map<String, dynamic>);
+        return FullCryptoCoin.fromJSON(json.decode(httpResponse.body)[0] as Map<String, dynamic>); 
+    } catch (_) {
+      print("Offline");
+      final Database db = await openMyDatabase();
+
+      // Retrieve from SQLite
+      List<FullCryptoCoin> coins = await getCoin(db, id);
+
+      // Check if there is data
+      if (coins[0].price != 0 || coins[0].id != "") {
+        return coins[0];
+      }
     }
 
     InfoAndStats infoAndStats = InfoAndStats(totalSupply: 0, totalVolume: 0, marketCap: 0, marketCapRanking: 0, todaysHigh: 0, todaysLow: 0, priceChangeOverall: 0, priceChangePercentage: 0);
@@ -77,7 +88,7 @@ class FullCryptoCoin extends CryptoCoin {
   });
 
   factory FullCryptoCoin.fromJSON(Map<String, dynamic> json) {
-    return switch (json) {
+    FullCryptoCoin fullCrypto = switch (json) {
       {
       'id': String id,
       'name': String name,
@@ -96,6 +107,11 @@ class FullCryptoCoin extends CryptoCoin {
           FullCryptoCoin(id: id, name: name, price: double.parse(price.toString()), imageLink: imageLink, symbol: symbol, sucessful: true, stats: InfoAndStats(marketCap: marketCap, marketCapRanking: marketCapRanking, todaysHigh: double.parse(todaysHigh.toString()), todaysLow: double.parse(todaysLow.toString()), priceChangeOverall: double.parse(priceChangeOverall.toString()), priceChangePercentage: priceChangePercentage, totalSupply: totalSupply, totalVolume: totalVolume)),
       _ => throw const FormatException("Could not load Cryto coin."),
     };
+
+    // Update db with fresh data
+    updateCoinWithoutDbInParams(fullCrypto);
+
+    return fullCrypto;
   }
 
   Map<String, Object?> toMap() {
