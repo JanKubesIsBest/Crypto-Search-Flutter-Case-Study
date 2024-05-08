@@ -41,6 +41,8 @@ I'm going to start with light theme, but if there is enough time, I can do dark 
 - **SQLite**
     - Stores data locally 
 
+<img src="https://github.com/JanKubesIsBest/nfctron-case-study/blob/main/crypto_app/lib/model/database/model_diagram/model_diagram.png">
+
 #### CryptoCoin vs FullCryptoCoin
 FullCryptoCoin extends CryptoCoin, for the purpose of getting more data.
 
