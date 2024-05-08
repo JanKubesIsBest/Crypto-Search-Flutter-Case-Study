@@ -12,6 +12,7 @@ Technologies:
     - I'm going to make a SQL er diagram, so we can keep things simple and clean. 
 - **Crypto API**
     - [[Coin Gecko](https://docs.coingecko.com)]
+    - [[Tiingo], (https://www.tiingo.com)]
 
 ### Design 🧑‍💻
 I'm going to start with light theme, but if there is enough time, I can do dark theme as well.
@@ -51,7 +52,7 @@ Basically, **CryptoCoin is used when getting lists, FullCryptoCoin is used on th
 # What I have learned 🚀
 I have learned a lot of things...
 
-First off, I have not had that big of a expiriance with Rest APIs, because in my previous projects I worked mainly with Firebase api and packages.
+First off, I have not had that big of a experience with Rest APIs, because in my previous projects I worked mainly with Firebase api and packages.
 
 Next thing I learned was Fl_charts, which is quite fun way of displaying data. I had quite a struggle making it work, but in the end, it was worth it.
 
