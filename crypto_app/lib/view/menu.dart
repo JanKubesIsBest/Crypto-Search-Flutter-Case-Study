@@ -131,7 +131,6 @@ class _PageViewBuilderForListState extends State<PageViewBuilderForList> {
                     // Trending is included in the list as the first one
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
-                      print("Rebuidling" + snapshot.data!.length.toString());
                       return MyPage(
                         // Trending id is 1
                         index: index + 1,
@@ -159,7 +158,6 @@ class _PageViewBuilderForListState extends State<PageViewBuilderForList> {
     setState(() {
       lists = getListsWithDb();
     });
-    print("UPdating lists");
   }
 }
 

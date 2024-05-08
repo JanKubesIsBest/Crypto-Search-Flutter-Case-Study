@@ -74,7 +74,6 @@ class _PageState extends State<MyPage> {
   }
 
   void updateCoinsUi() {
-    print("Updating coin ui");
     late Future<RetrievedCryptoCoins> newCryptoCoins;
 
     // If is trending

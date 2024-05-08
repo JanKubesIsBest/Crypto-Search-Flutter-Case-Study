@@ -36,12 +36,8 @@ class _ModalBodyState extends State<ModalBody> {
   }
 
   void updateList() async {
-    print("Updating list");
     final List<MyList> updatedList = await getListsWithDatabase();
     lists_state.clear();
-
-    print("Updated list");
-    print(updatedList);
 
     setState(() {
       lists_state.addAll(updatedList);
@@ -53,14 +49,14 @@ class _ModalBodyState extends State<ModalBody> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(minHeight: 100, maxHeight: 500),
+      constraints: const BoxConstraints(minHeight: 100,),
       child: Padding(
         padding: const EdgeInsets.only(top: 15.0),
         child: Column(
           children: [
             SizedBox(
               // This should be something that does not overflow on devices, need to test more
-              height: 390,
+              height: 350,
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: lists_state.length,
