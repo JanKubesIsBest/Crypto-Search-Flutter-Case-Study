@@ -1,5 +1,5 @@
 # Jak spustit?
-Aplikaci doporučuji spusti na lokálním zařízení pomocí 
+Aplikaci doporučuji spustit na fyzickém zařízení pomocí 
 
 > flutter run --release
 
