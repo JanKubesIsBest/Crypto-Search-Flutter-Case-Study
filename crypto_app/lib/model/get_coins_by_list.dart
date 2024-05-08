@@ -3,6 +3,7 @@ import 'package:crypto_app/model/database/open_database.dart';
 import 'package:crypto_app/model/database/retrieve.dart';
 import 'package:sqflite/sqflite.dart';
 
+/// Searches FullCryptoCoins that are in the list.
 Future<RetrievedCryptoCoins> getCoinsByList(int listId) async {
   final Database db = await openMyDatabase();
 

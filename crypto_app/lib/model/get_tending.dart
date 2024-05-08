@@ -6,6 +6,7 @@ import 'package:crypto_app/model/database/retrieve.dart';
 import 'package:http/http.dart' as http;
 import 'package:sqflite/sqflite.dart';
 
+/// Retrieves trending coins
 Future<RetrievedCryptoCoins> getTrendingCoins() async {
   late final RetrievedCryptoCoins response;
   print("Getting trending coins");

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:crypto_app/view/coinPage/graph.dart';
 import 'package:http/http.dart' as http;
 
+/// Get historical data of a coin, uses different api.
 Future<HistoricalData> getHistoricalData(String ticker, String startDate, String frequency) async {
     late final HistoricalData response;
 

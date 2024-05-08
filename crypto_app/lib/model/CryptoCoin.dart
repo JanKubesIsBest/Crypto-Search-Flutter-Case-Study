@@ -40,6 +40,7 @@ class CryptoCoin {
     };
   }
 
+  /// Retrieves all data of the coin, returns FullCryptoCoin
   Future<FullCryptoCoin> getFullCoin() async {
     final Map<String, String> headers = <String, String>{
       "accept": "application/json",
