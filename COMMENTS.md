@@ -5,18 +5,20 @@ At the end of the day, my school is heavy english based and I write most of my c
 
 ## Plan 🧭
 Technologies: 
-- Flutter (Ofcourse :D)
-- SQLite database 
+- **Flutter** (Ofcourse :D)
+    - This means that the app works on both **IOS and Anroid** 🔥
+- **SQLite** database 
     - I have worked with SQLite multiple times and we had a big project on it recently in school. 
     - I'm going to make a SQL er diagram, so we can keep things simple and clean. 
-- Crypto API
+- **Crypto API**
     - [[Coin Gecko](https://docs.coingecko.com)]
 
 ### Design 🧑‍💻
 I'm going to start with light theme, but if there is enough time, I can do dark theme as well.
 
-- Material 3
-- Cards
+- **Material 3**
+    - Design is mainly for Android, but it looks quite good on IOS too.
+- **Cards**
 
 #### Menu 
 - Page view builder
@@ -36,13 +38,13 @@ I'm going to start with light theme, but if there is enough time, I can do dark 
     - This is quite fun way of visualizing this, and it looks like a battle between profit and loss 
 
 ### Database 📈
-- MySQL
+- **SQLite**
     - Stores data locally 
 
 #### CryptoCoin vs FullCryptoCoin
 FullCryptoCoin extends CryptoCoin, for the purpose of getting more data.
 
-Basically, CryptoCoin is used when getting lists, FullCryptoCoin is used on the CoinPage. FullCryptoCoin is then stored in the database.
+Basically, **CryptoCoin is used when getting lists, FullCryptoCoin is used on the CoinPage**. FullCryptoCoin is then stored in the database.
 
 # What I have learned 🚀
 I have learned a lot of things...
