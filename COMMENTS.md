@@ -57,6 +57,15 @@ Next thing I learned was Fl_charts, which is quite fun way of displaying data. I
 
 Although I have worked with MySQL library before, I think this has strengthened my proficincy in combining Flutter and MySQL.
 
+### Graph 📈
+Graph function is pretty cool, but it has limitations.
+
+It uses different api, called tiingo. 
+
+I did not find sufficient data about the assets tiingo can retrieve, so it is a little guess if the api will return the historical data or not.
+
+**I know that big coins work, for example: Etherium, Bitcoin, Solana.**
+
 ## Room for more features
 I know that there could be many features added, like:
 
@@ -68,3 +77,7 @@ I know that there could be many features added, like:
         - coin_id
         - date
     - Then you could just calculate profit/loss from historical data
+
+
+## Limitations
+Most errors come from the api overload. This is most visible in the CoinPage, where it shows the "Could not load data" text.
