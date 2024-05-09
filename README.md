@@ -5,7 +5,7 @@ Aplikaci doporučuji spustit na fyzickém zařízení pomocí
 
 Pokud však nemáte nainstalovaný Flutter, .apk je schovaná v ***./build/app/outputs/flutter-apk/app-release.apk***
 
-Děkuju za příležitost! Pro více mého textu o projektu najdeve v ***COMMENTS.md***
+Děkuju za příležitost! Pro více mého textu o projektu najdete v ***COMMENTS.md***
 
 
 # 🧑🏻‍🚀 NFCtron Mobile Case Study (Spring, 2024)
