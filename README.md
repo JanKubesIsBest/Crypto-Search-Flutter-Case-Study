@@ -1,96 +1,64 @@
-# Jak spustit?
-Aplikaci doporučuji spustit na fyzickém zařízení pomocí 
+# Crypto App 📱
+*Note: **This app was developed as a case study for my summer internship/first real work experience in NFCtron**, this is not a project I have ever worked on for a longer period of time.*
 
-> flutter run --release
+## Overview 📖
+This project is a mobile application developed using Flutter for tracking cryptocurrency prices and information. It provides users with features to view trending coins, search for specific cryptocurrencies, see detailed data including price charts, and manage a list of favorite coins stored locally.
 
-Pokud však nemáte nainstalovaný Flutter, .apk je schovaná v ***./build/app/outputs/flutter-apk/app-release.apk***
+## Technologies Used 🛠️
 
-Děkuju za příležitost! Pro více mého textu o projektu najdete v ***COMMENTS.md***
+* **Flutter:** The core framework used for building the application, allowing for cross-platform deployment on both **iOS and Android** from a single codebase. 🔥
+* **SQLite:** Employed for local database storage, primarily to persist the user's list of favorite cryptocurrencies.
+* **Crypto APIs:** Integrates with third-party APIs (e.g., [CoinGecko](https://docs.coingecko.com), [Tiingo](https://www.tiingo.com)) to fetch real-time market data and historical price information.
 
+## Core Features ✨
 
-# 🧑🏻‍🚀 NFCtron Mobile Case Study (Spring, 2024)
+* **Main View (Page View):**
+    * **Trending Page:** Displays currently trending cryptocurrencies based on market data.
+    * **Favorites Page:** Shows coins that the user has marked as favorites, retrieved from the local SQLite database.
+* **Search Functionality:**
+    * Allows users to search for cryptocurrencies dynamically.
+    * Search results are presented clearly, often using widget-based list items.
+* **Coin Detail Page:**
+    * Provides in-depth information about a selected cryptocurrency.
+    * Includes a **graph** displaying historical price data.
+    * Features a visual representation of the day's price range (high/low).
+* **Local Storage:**
+    * User's favorite coins are saved locally using the SQLite database.
 
->👋 Vítejte u zadání pro kandidáty na pozici 📲 **iOS/Android Software Developer** v NFCtron! Vaším úkolem bude
-vytvořit jednoduchou mobilní aplikaci, kde demonstrujete své znalosti a případné zkušenosti z mobilního vývoje.
+## Design 🎨
 
-## 🎯 Úvod
+* Built following **Material 3** design guidelines, offering a modern look and feel primarily optimized for Android but functional on iOS.
+* Utilizes **Card-based layouts** for presenting information chunks clearly.
+* Developed initially with a **light theme**, with the possibility of adding a dark theme in the future.
 
-V NFCtron jsme před rokem přepsali naší aplikaci do [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html).
-V Kotlinu udržujeme business logiku aplikace. UI píšeme nativně ve SwiftUI a Jetpack Compose.
-I tvým úkolem bude tedy vytvořit jednoduchou mobilní aplikaci pomocí KMP a nativních UI frameworků.
+Enjoy simple snapshot from the app👇
 
-**👉🏻 O aplikaci**
+![Image](https://github.com/user-attachments/assets/4a25b8a6-1806-4c02-923c-1ec7e01a5842)
 
-Vytvoříš jednoduchou aplikaci pro iOS/Android. Počítáme s tím, že hned nebudeš schopen napsat aplikaci pro obě platformy, na to ti dáme prostor u nás. Můžeš si tedy vybrat jednu a tu nám poslat.
-Dáme ti prostor a design necháme na tobě. Měj na paměti, že každá platforma má svoje UI/UX guidelines a ty chceme dodržovat.
-Co se týče shared KMP modulu, tak bychom byli rádi, kdyby byla většina kódu právě tady, sdílená pro obě platformy.
+## Database 📈
 
-Z různých free to use API jsme vybrali právě [CoinGecko](https://docs.coingecko.com/reference/introduction). Toto API poskytuje dostatečné množství dat a podporuje různá filtrování.
+* **SQLite** is used for on-device storage.
+* The primary use case is storing the IDs of the user's favorite coins.
 
-## ✍️ Zadání a požadavky
-Co bude cílem a obsahem aplikace? Aplikace bude zobrazovat trending kryptoměny. Uživatel bude moci vybrané kryptoměny označit jako oblíbené. Oblíbené kryptoměny uvidí v separátním seznamu, ze kterého je může i odstranit.
-Co když tvoje oblíbená kryptoměna nebude v trending seznamu? V aplikaci si ji budeš moct vyhledat a přidat do seznamu oblíbených.
+#### Database Schema Diagram
 
-### Požadavky
-- [ ] Seznam trending kryptoměn. [[Trending Search List](https://docs.coingecko.com/reference/trending-search)] ✅
-- [ ] Seznam oblíbených kryptoměn. [[Coins List with Market Data](https://docs.coingecko.com/reference/coins-markets)] ✅
-  - [ ] V listingu jsou vidět informace o růstu za poslední časový úsek, ilustrace grafu, jméno a aktuální cena. ✅
-- [ ] Označení oblíbených kryptoměn. ✅
-- [ ] Vyhledávání v kryptoměnách. [[Search Queries](https://docs.coingecko.com/reference/search-data)] ✅
-- [ ] Aplikace persistuje poslední aktuální data pro offline přístup. ✅
-- [ ] Aplikace dodržuje iOS/Android konvence a guidelines ✅
+<img src="https://github.com/JanKubesIsBest/nfctron-case-study/blob/main/crypto_app/lib/model/database/model_diagram/model_diagram.png" alt="Database ER Diagram">
 
-## 🌟 Bonusy
-- [ ] Lokalizace aplikace.
-- [ ] Graf vývoje ceny za různá časová období. ✅
-- [ ] Aplikace pro druhou platformu. 🔥 ✅
-- [ ] Unit a UI testy.
+#### Data Models: `CryptoCoin` vs `FullCryptoCoin`
 
-_A dalším vychytávkám se meze nekladou! Ukažte, co umíte! 💫_
+The application uses two distinct models for handling cryptocurrency data:
 
-## 🔨 Doporučené technologie a nástroje
-- SwiftUI/Jetpack Compose
-- [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html)
-- MVVM architektura
-- [Koin](https://insert-koin.io)
-- [Ktor](https://ktor.io)
-- [SQLDelight](https://github.com/cashapp/sqldelight)
-- [KDoctor](https://github.com/Kotlin/kdoctor)
-- [SwiftLint](https://github.com/realm/SwiftLint) + [ktlint](https://github.com/pinterest/ktlint)
+* `CryptoCoin`: A basic model containing essential information suitable for displaying lists (e.g., search results, trending coins).
+* `FullCryptoCoin`: Extends `CryptoCoin` with more detailed attributes required for the coin detail page (e.g., historical data points, extended description). This `FullCryptoCoin` object is typically what gets stored in the database when a user favorites a coin.
 
-## ☝🏻 Dobré vědět
-- Využití jiných knihoven není zakázáno.
-- Dbejte na kvalitu kódu, jeho čitelnost a strukturu.
-- Dávejte si pozor na porušení architektury.
-- Informace stačí zobrazovat v USD.
+## Potential Future Enhancements 🚀
 
-_Podporujeme a oceníme růst, na ten je v NFCtron prostoru dost! 📈 Naučil ses něco nového, nebo tě něco zaujalo? Určitě napiš do svého _`COMMENTS.md`_ své pocity a cestu vývojem aplikace. 🚀_
+* **Local Caching:** Implement caching for images and graph data to reduce API calls and improve loading times.
+* **Portfolio Tracking:** Add functionality for users to log their cryptocurrency purchases (coin ID, date, amount, price) and track their overall profit/loss based on current and historical data.
+* **Advanced Filtering/Sorting:** Introduce more options for sorting and filtering coin lists (e.g., by market cap, price change).
+* **Push Notifications:** Alert users about significant price changes for their favorite coins.
 
-## 📋 Kritéria Hodnocení
-- Funkčnost a splnění funkčních požadavků.
-- Vzhled aplikace a dodržení platform specific guidelines.
-- Kvalita, struktura a komentování/dokumentace kódu.
-- Práce s Git.
+## Known Limitations ⚠️
 
-## 🪜 Jak postupovat?
-1. Udělejte si fork tohoto repozitáře.
-2. Nastavte si své oblíbené vývojové prostředí.
-3. Dokončete úkol dle požadavků a zadání výše.
-4. Průběžně commitujte a pushujte své změny.
-5. Otestujte řádně svou aplikaci.
-6. Po dokončení úkolu zašlete odkaz na repozitář na email [ditrich@nfctron.com](mailto:ditrich@nfctron.com):
-
-
-📧 Máte-li jakékoli dotazy nebo potřebujete pomoci, neváhejte se na nás obrátit.
-
----
-
-Přejeme vám hodně štěstí a těšíme se na vaše řešení! 🌟
-
-_–– Tým NFCtron_
-
-
-# Informace o mém postupu
-Informace o mém postupu, plánu, atd. budou v README pro samotnou crypto aplikaci. 
-
-Děkuji za příležitost.
+* The application relies heavily on external APIs. Performance and data availability can be affected by API rate limits or downtime.
+* Fetching historical data for graphs (often using a separate API like Tiingo) might not be available for all listed cryptocurrencies, potentially leading to missing graphs for less common coins. Errors related to API limits might display messages like "Could not load data".
